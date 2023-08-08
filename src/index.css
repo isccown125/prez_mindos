@@ -7,9 +7,22 @@
 *{
     font-family: 'Montserrat', sans-serif;
 }
+*::-webkit-scrollbar{
+    width: 10px;
+}
 
-.slide-background{
-    top:0!important;
+*::-webkit-scrollbar-thumb{
+    width: 20px;
+    background-color: #a539bb;
+}
+*::-webkit-scrollbar-track{
+    background-color: #37063d;
+}
+
+#reveal section {
+    height: 90%;
+    top: 50% !important;
+    transform: translateY(-50%);
 }
 .translate-x-center{
     left:50%;

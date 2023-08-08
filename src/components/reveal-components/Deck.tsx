@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-// @ts-ignore
 import Reveal from "reveal.js";
 import { revealConfig } from "../../configs/reveal-config.ts";
 import Footer from "../footer/Footer.tsx";
 import Header from "../header/Header.tsx";
+import RevealJS from "@cenk1cenk2-presentations/react-reveal-base/dist/components/RevealJS";
 
 interface Props {
   children: React.ReactNode;
@@ -15,11 +15,11 @@ const Deck = ({ children }: Props) => {
   });
 
   return (
-    <div className="slides relative" style={{ transition: "transform 0" }}>
+    <RevealJS>
       <Header />
       {children}
       <Footer />
-    </div>
+    </RevealJS>
   );
 };
 

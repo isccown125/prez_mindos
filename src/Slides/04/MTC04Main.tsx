@@ -1,13 +1,13 @@
-import Section from "../../components/reveal-components/Section.tsx";
 import Mtc04MindReset from "./MTC04MindReset.tsx";
 import MTC04MainPileczki from "./Mtc04MainBalls.tsx";
+import { Slide } from "@cenk1cenk2-presentations/react-reveal-base";
 
 const Mtc04Main = () => {
   return (
-    <Section>
+    <Slide>
       <Mtc04MindReset />
       <MTC04MainPileczki />
-    </Section>
+    </Slide>
   );
 };
 

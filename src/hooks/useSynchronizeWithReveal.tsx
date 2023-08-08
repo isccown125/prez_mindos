@@ -1,32 +1,21 @@
 import { useEffect, useState } from "react";
 import Reveal from "reveal.js";
-import { setInitialState, useAppDispatch } from "../store";
 
-export const getSlideCords = (cords: string) => {
-  return cords.replace(/^[0-9]+\/[0-9]+/g, cords);
-};
-
-const useSynchronizeWithReveal = (currentSlide: string) => {
-  const [slideCords, setSlideCords] = useState<string>(currentSlide);
-  const dispatch = useAppDispatch();
-
+const useSynchronizeWithReveal = () => {
+  const [slideCords, setSlideCords] = useState<{indexh: number, indexv:number}>({indexh:0, indexv:0});
   useEffect(() => {
     Reveal.on("ready", () => {
-      dispatch(
-        setInitialState({
-          currentStatePresentation: Reveal.getState(),
-        })
-      );
+      const {indexh, indexv} = Reveal.getState()
+      
+      setSlideCords({indexh, indexv})
     });
-    Reveal.on("slidechanged", (event) => {
-      setSlideCords(`${event.indexh}/${event.indexv}`);
+    Reveal.on("slidechanged", () => {
+      const {indexh, indexv} = Reveal.getState()
+      setSlideCords({indexh, indexv})
     });
   }, []);
 
-  useEffect(() => {
-    getSlideCords(slideCords);
-  }, [slideCords]);
-
+  console.log(slideCords)
   return {
     slideCords,
   };

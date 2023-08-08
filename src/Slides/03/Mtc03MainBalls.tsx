@@ -1,11 +1,12 @@
-import Section from "../../components/reveal-components/Section.tsx";
+
 import { Box } from "@mui/material";
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import useSynchronizeWithReveal from "../../hooks/useSynchronizeWithReveal.tsx";
+import { Slide } from "@cenk1cenk2-presentations/react-reveal-base";
 
 const Mtc03MainBalls = () => {
-  useSynchronizeWithReveal("2/1");
+  useSynchronizeWithReveal();
 
   const elon = useRef<HTMLDivElement>(null);
 
@@ -20,7 +21,7 @@ const Mtc03MainBalls = () => {
   });
 
   return (
-    <Section slideBackgroundImgUrl="/assets/slides/0201/img/strefa-koncentracji.png">
+    <Slide backgroundImage="/assets/slides/0201/img/strefa-koncentracji.png">
       <Box className="h-full w-full relative">
         <div ref={elon} className="absolute left-[230px] bottom-[25px]">
           <img
@@ -29,7 +30,7 @@ const Mtc03MainBalls = () => {
           />
         </div>
       </Box>
-    </Section>
+    </Slide>
   );
 };
 

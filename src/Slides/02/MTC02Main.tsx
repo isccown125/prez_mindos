@@ -1,12 +1,12 @@
-import Section from "../../components/reveal-components/Section.tsx";
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import useSynchronizeWithReveal from "../../hooks/useSynchronizeWithReveal.tsx";
 import SectionContent from "../../components/reveal-components/SectionContent.tsx";
 import { Box, Typography } from "@mui/material";
+import Slide from "@cenk1cenk2-presentations/react-reveal-base/dist/components/Slide";
 
 const Mtc02Main = () => {
-  useSynchronizeWithReveal("1/0");
+  useSynchronizeWithReveal();
 
   const message = useRef<HTMLDivElement>(null);
   const container = useRef<HTMLDivElement>(null);
@@ -38,9 +38,7 @@ const Mtc02Main = () => {
   });
 
   return (
-    <Section
-      slideBackgroundImgUrl={"/assets/slides/0100/img/strefy-frontview.png"}
-    >
+    <Slide backgroundImage={"/assets/slides/0100/img/strefy-frontview.png"}>
       <SectionContent>
         <Box className="flex absolute inset-0 w-full h-full">
           <div ref={container} className="relative flex w-full h-full">
@@ -106,7 +104,7 @@ const Mtc02Main = () => {
           </div>
         </div>
       </SectionContent>
-    </Section>
+    </Slide>
   );
 };
 

@@ -1,0 +1,99 @@
+.yellow-sidebar {
+    width: 316px;
+    height: 540px;
+    background: transparent url('../img/yellowsidebar.png') 0% 0% no-repeat padding-box;
+    opacity: 1;
+}
+
+.pileczki {
+    width: 480px;
+}
+
+.topbar {
+    font-family: montserrat, sans-serif;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 14px;
+    color: #FDD63C;
+}
+
+.topbar-elem {
+    display: inline-block;
+}
+
+.member {
+    display: inline-block;
+    background: #FDD63C 0% 0% no-repeat padding-box;
+    border-radius: 8px;
+    color: #6A2578;
+    padding: 8px 16px 8px 16px;
+}
+
+.footer {
+    font-size: 24px;
+    color: #6A2578;
+    vertical-align: middle;
+    display: flex;
+    gap:10px;
+}
+
+.footer-elem {
+    display: inline-block;
+    background: #FDD63C 0% 0% no-repeat padding-box;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.footer-elem-inside {
+    margin-top: 8px;
+}
+
+
+.logo-white {
+    margin-top: 0px!important;
+}
+
+.pileczki_text {
+    text-align: left;
+    font-family: montserrat, sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 26px;
+    letter-spacing: 0px;
+    color: #6A2578;
+    opacity: 1;
+}
+
+.pileczki_text_desc {
+    text-align: left;
+/*    font: normal normal medium 15px/20px Montserrat;*/
+    font-family: montserrat, sanf-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: #6A2578;
+    opacity: 1;
+}
+
+.pileczki_monocolor {
+    top: 111px;
+    left: 1577px;
+    width: 302px;
+    height: 252px;
+    background: transparent url('../img/pileczki-monokolor.png') 0% 0% no-repeat padding-box;
+    opacity: 1;
+}
+
+.wyniki {
+    top: 57px;
+    left: 722px;
+    width: 57px;
+    height: 19px;
+    text-align: left;
+    font: normal normal 800 15px/19px Montserrat;
+    letter-spacing: 0px;
+    color: #FDD63C;
+    opacity: 1;
+}

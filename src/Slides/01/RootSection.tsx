@@ -1,13 +1,13 @@
 import Main from "./Main.tsx";
 import Balls from "./Balls.tsx";
-import VerticalSlides from "../../components/reveal-components/VerticalSlides.tsx";
 
+import { Slide } from "@cenk1cenk2-presentations/react-reveal-base";
 const RootSection = () => {
   return (
-    <VerticalSlides>
+    <Slide>
       <Main />
       <Balls />
-    </VerticalSlides>
+    </Slide>
   );
 };
 

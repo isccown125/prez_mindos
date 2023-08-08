@@ -5,7 +5,7 @@ const Header = () => {
     <header className="w-full max-h-[70px] flex items-center absolute -top-[5px] z-50">
       <div className="h-min flex justify-between w-full items-center">
         <div>
-          <img src="/assets/slides/common/img/Fitness_Mozgu_White.png" />
+          <img className="min-w-[90px]" src="/assets/slides/common/img/Fitness_Mozgu_White.png" />
         </div>
         <div className="flex w-full justify-end gap-4">
           <Box className="flex items-center gap-2">

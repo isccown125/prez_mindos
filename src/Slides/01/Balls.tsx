@@ -1,12 +1,12 @@
-import Section from "../../components/reveal-components/Section.tsx";
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import useSynchronizeWithReveal from "../../hooks/useSynchronizeWithReveal.tsx";
 import { Box, Typography } from "@mui/material";
 import SectionContent from "../../components/reveal-components/SectionContent.tsx";
+import { Slide } from "@cenk1cenk2-presentations/react-reveal-base";
 
 const Balls = () => {
-  useSynchronizeWithReveal("0/1");
+   const {slideCords} = useSynchronizeWithReveal();
   const balls = useRef<HTMLDivElement>(null);
   const yellowBG = useRef<HTMLDivElement>(null);
   const ballsHeader = useRef<HTMLDivElement>(null);
@@ -14,7 +14,10 @@ const Balls = () => {
   const monoBalls = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
+    const {indexh, indexv} = slideCords;
+   
+          const ctx = gsap.context(() => {
+             if(indexh === 0 && indexv === 1){
       const tl = gsap.timeline({ delay: 0.2 });
       tl.from(balls.current, {
         duration: 1,
@@ -35,12 +38,15 @@ const Balls = () => {
 
       const tl5 = gsap.timeline({ delay: 0.6 });
       tl5.from(monoBalls.current, { duration: 0.8, x: 100 });
+          }
     });
     return () => ctx.revert();
-  });
+
+
+  },[slideCords]);
 
   return (
-    <Section slideBackgroundImgUrl={"/assets/slides/0000/img/bgred.png"}>
+    <Slide backgroundImage={"/assets/slides/0000/img/bgred.png"}>
       <SectionContent>
         <Box className="flex h-full">
           <div ref={balls} className="w-full flex justify-center items-center ">
@@ -79,7 +85,7 @@ const Balls = () => {
           </div>
         </Box>
       </SectionContent>
-    </Section>
+    </Slide>
   );
 };
 

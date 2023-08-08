@@ -1,11 +1,11 @@
-import Section from "../../components/reveal-components/Section.tsx";
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import useSynchronizeWithReveal from "../../hooks/useSynchronizeWithReveal.tsx";
 import { Avatar, Box, Grid, Typography } from "@mui/material";
+import Slide from "@cenk1cenk2-presentations/react-reveal-base/dist/components/Slide";
 
 const Main = () => {
-  useSynchronizeWithReveal("0/0");
+  const { slideCords } = useSynchronizeWithReveal();
 
   const elon = useRef<HTMLDivElement>(null);
   const goblet = useRef<HTMLDivElement>(null);
@@ -18,83 +18,92 @@ const Main = () => {
   const icon3 = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
+    const { indexh, indexv } = slideCords;
+
     const ctx = gsap.context(() => {
-      const tl1 = gsap.timeline({ delay: 0.2 });
-      tl1.from(elon.current, { duration: 0.7, opacity: 0, y: 70, scale: 0.9 });
-
-      const tl2 = gsap.timeline({ delay: 0.3 });
-
-      tl2.from(balls.current, {
-        duration: 0.7,
-        opacity: 0,
-        y: -30,
-        scale: 0.9,
-      });
-
-      const tl3 = gsap.timeline({ delay: 0.5 });
-      const tl4 = gsap.timeline({ delay: 0.5 });
-      tl3.from(goblet.current, {
-        duration: 0.7,
-        opacity: 0,
-        x: 140,
-        y: 80,
-        scale: 0.1,
-      });
-      tl4
-        .from(table3d.current, {
+      if (indexh === 0 && indexv === 0) {
+        const tl1 = gsap.timeline({ delay: 0.2 });
+        tl1.from(elon.current, {
           duration: 0.7,
           opacity: 0,
-          x: -120,
-          y: 80,
-          scale: 0.1,
-        })
-        .from(rightCol.current, {
-          duration: 0.7,
-          delay: 0.2,
-          opacity: 0,
-          scale: 0.5,
-          ease: "back.out(2)",
+          y: 70,
+          scale: 0.9,
         });
 
-      const iconsDelay = 2;
+        const tl2 = gsap.timeline({ delay: 0.3 });
 
-      const tlIcon1 = gsap.timeline({ delay: iconsDelay });
-      const tlIcon2 = gsap.timeline({ delay: iconsDelay + 0.3 });
-      const tlIcon3 = gsap.timeline({ delay: iconsDelay + 0.2 });
+        tl2.from(balls.current, {
+          duration: 0.7,
+          opacity: 0,
+          y: -30,
+          scale: 0.9,
+        });
 
-      tlIcon1.from(icon1.current, {
-        duration: 0.4,
-        opacity: 0,
-        scale: 0.3,
-        ease: "back.out(4)",
-      });
-      tlIcon2.from(icon2.current, {
-        duration: 0.4,
-        opacity: 0,
-        scale: 0.3,
-        ease: "back.out(4)",
-      });
-      tlIcon3
-        .from(icon3.current, {
+        const tl3 = gsap.timeline({ delay: 0.5 });
+        const tl4 = gsap.timeline({ delay: 0.5 });
+        tl3.from(goblet.current, {
+          duration: 0.7,
+          opacity: 0,
+          x: 140,
+          y: 80,
+          scale: 0.1,
+        });
+        tl4
+          .from(table3d.current, {
+            duration: 0.7,
+            opacity: 0,
+            x: -120,
+            y: 80,
+            scale: 0.1,
+          })
+          .from(rightCol.current, {
+            duration: 0.7,
+            delay: 0.2,
+            opacity: 0,
+            scale: 0.5,
+            ease: "back.out(2)",
+          });
+
+        const iconsDelay = 2;
+
+        const tlIcon1 = gsap.timeline({ delay: iconsDelay });
+        const tlIcon2 = gsap.timeline({ delay: iconsDelay + 0.3 });
+        const tlIcon3 = gsap.timeline({ delay: iconsDelay + 0.2 });
+
+        tlIcon1.from(icon1.current, {
           duration: 0.4,
           opacity: 0,
           scale: 0.3,
           ease: "back.out(4)",
-        })
-        .from(leftCol.current, {
-          duration: 1.5,
-          opacity: 0,
-          y: -200,
-          ease: "elastic.out(1, 0.4)",
         });
+        tlIcon2.from(icon2.current, {
+          duration: 0.4,
+          opacity: 0,
+          scale: 0.3,
+          ease: "back.out(4)",
+        });
+        tlIcon3
+          .from(icon3.current, {
+            duration: 0.4,
+            opacity: 0,
+            scale: 0.3,
+            ease: "back.out(4)",
+          })
+          .from(leftCol.current, {
+            duration: 1.5,
+            opacity: 0,
+            y: -200,
+            ease: "elastic.out(1, 0.4)",
+          });
+      }
     });
 
     return () => ctx.revert();
-  });
+  }, [slideCords]);
 
   return (
-    <Section
-      slideBackgroundImgUrl={"/assets/slides/0000/img/bgred.png"}
+    <Slide
+      backgroundImage={"/assets/slides/0000/img/bgred.png"}
       className="h-[80%] inset-0 absolute z-40"
     >
       <Grid container className="h-full">
@@ -220,7 +229,7 @@ const Main = () => {
           </Box>
         </Grid>
       </Grid>
-    </Section>
+    </Slide>
   );
 };
 

@@ -6,6 +6,7 @@ export default {
       yellow: "#FDD63C",
       purple: "#6A2578",
       focusZone: "#600a6b",
+      black: "#000000",
     },
     extend: {},
   },

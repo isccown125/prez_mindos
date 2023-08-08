@@ -1,0 +1,12 @@
+<svg id="dashboard" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
+  <path id="Base" d="M18,0A18,18,0,1,1,0,18,18,18,0,0,1,18,0Z" fill="#fdd63c"/>
+  <g id="puchar" transform="translate(-436.014 -88.749)">
+    <path id="Path_12974" data-name="Path 12974" d="M448.339,103.064l.17,1.753h-.349a2.457,2.457,0,0,0-2.447,2.675l0,.054a5.391,5.391,0,0,0,3.452,4.56,1.327,1.327,0,0,1,.644.523,4.915,4.915,0,0,0,3.216,2.167v2.223a1.187,1.187,0,0,1-.545,1" transform="translate(0 -4.406)" fill="none" stroke="#411051" stroke-linecap="square" stroke-width="0.6"/>
+    <line id="Line_160" data-name="Line 160" x1="12.708" transform="translate(447.59 97.176)" fill="none" stroke="#411051" stroke-linecap="square" stroke-width="0.6"/>
+    <path id="Path_12975" data-name="Path 12975" d="M482.629,118.019a1.187,1.187,0,0,1-.545-1V114.8a4.916,4.916,0,0,0,3.183-2.117,1.363,1.363,0,0,1,.689-.526,5.39,5.39,0,0,0,3.581-4.606l0-.055a2.457,2.457,0,0,0-2.448-2.675h-.49l.17-1.753" transform="translate(-27.225 -4.406)" fill="none" stroke="#411051" stroke-linecap="square" stroke-width="0.6"/>
+    <path id="Path_12976" data-name="Path 12976" d="M461.818,169.134v-1.385h8.371v1.385" transform="translate(-12.06 -52.812)" fill="none" stroke="#411051" stroke-linecap="square" stroke-width="0.6"/>
+    <path id="Path_12977" data-name="Path 12977" d="M470.441,112.147l.744,1.79,1.949.166-1.49,1.249.461,1.917-1.664-1.043-1.664,1.043.461-1.917-1.49-1.249,1.949-.166Z" transform="translate(-16.497 -11.203)" fill="none" stroke="#411051" stroke-linecap="square" stroke-width="0.6"/>
+    <path id="Path_12978" data-name="Path 12978" d="M452.965,119.464l-.415-4.269h-.462a1.154,1.154,0,0,0-1.15,1.246l.009.1A4.008,4.008,0,0,0,453,119.73Q452.977,119.6,452.965,119.464Z" transform="translate(-3.916 -13.484)" fill="none" stroke="#411051" stroke-linecap="square" stroke-width="0.6"/>
+    <path id="Path_12979" data-name="Path 12979" d="M498.789,115.2h-.6l-.414,4.269q-.015.175-.042.347a4.009,4.009,0,0,0,2.2-3.265l.009-.1A1.154,1.154,0,0,0,498.789,115.2Z" transform="translate(-38.934 -13.484)" fill="none" stroke="#411051" stroke-linecap="square" stroke-width="0.6"/>
+  </g>
+</svg>

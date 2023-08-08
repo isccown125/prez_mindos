@@ -1,12 +1,13 @@
-import Section from "../../components/reveal-components/Section.tsx";
+
 import { Box, Typography } from "@mui/material";
 import SectionContent from "../../components/reveal-components/SectionContent.tsx";
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import useSynchronizeWithReveal from "../../hooks/useSynchronizeWithReveal.tsx";
+import { Slide } from "@cenk1cenk2-presentations/react-reveal-base";
 
 const Mtc03AlphabetGame = () => {
-  useSynchronizeWithReveal("2/0");
+  useSynchronizeWithReveal();
 
   const alphabetHeader = useRef<HTMLDivElement>(null);
   const alphabetText = useRef<HTMLDivElement>(null);
@@ -61,7 +62,7 @@ const Mtc03AlphabetGame = () => {
   });
 
   return (
-    <Section slideBackgroundImgUrl="/assets/slides/0200/img/bgred3.png">
+    <Slide backgroundPosition="center"   backgroundImage="/assets/slides/0200/img/bgred3.png">
       <SectionContent>
         <div className="relative flex w-full h-full">
           <div ref={volumeIcon} className="absolute left-[150px] top-[300px]">
@@ -100,7 +101,7 @@ const Mtc03AlphabetGame = () => {
           </Box>
         </div>
       </SectionContent>
-    </Section>
+    </Slide>
   );
 };
 
