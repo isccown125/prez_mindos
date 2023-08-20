@@ -3,6 +3,7 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import useSynchronizeWithReveal from "../../hooks/useSynchronizeWithReveal";
+import { getAbsolutePath } from "../../utils/functions";
 
 const MTC08Main = () => {
   useSynchronizeWithReveal();
@@ -35,7 +36,12 @@ const MTC08Main = () => {
   });
 
   return (
-    <Slide backgroundImage="/assets/slides/0800/img/biurko-sideview.png">
+    <Slide
+      backgroundImage={
+        getAbsolutePath().coreUrl +
+        "/assets/slides/backgrounds/biurko-sideview.png"
+      }
+    >
       <Box
         ref={container}
         className="w-full h-[90%] rounded-2xl bg-yellow absolute translate-y-center py-3 px-8 overflow-hidden"
@@ -63,119 +69,10 @@ const MTC08Main = () => {
             <img
               style={{ margin: 0 }}
               className="h-[70px]"
-              src="/assets/slides/0800/img/biurko-sideview.png"
-            />
-            <Typography>cupcakes</Typography>
-            <Typography>09.06.2018</Typography>
-            <Box className="flex">
-              <Button>dsa</Button>
-              <Button>dsa</Button>
-            </Box>
-            <Button>Play</Button>
-          </Box>
-          <Box className="border-2 border-purple rounded-xl text-purple shadow-md shadow-focusZone items-center h-min flex justify-between">
-            <img
-              style={{ margin: 0 }}
-              className="h-[70px]"
-              src="/assets/slides/0800/img/biurko-sideview.png"
-            />
-            <Typography>cupcakes</Typography>
-            <Typography>09.06.2018</Typography>
-            <Box className="flex">
-              <Button>dsa</Button>
-              <Button>dsa</Button>
-            </Box>
-            <Button>Play</Button>
-          </Box>
-          <Box className="border-2 border-purple rounded-xl text-purple shadow-md shadow-focusZone items-center h-min flex justify-between">
-            <img
-              style={{ margin: 0 }}
-              className="h-[70px]"
-              src="/assets/slides/0800/img/biurko-sideview.png"
-            />
-            <Typography>cupcakes</Typography>
-            <Typography>09.06.2018</Typography>
-            <Box className="flex">
-              <Button>dsa</Button>
-              <Button>dsa</Button>
-            </Box>
-            <Button>Play</Button>
-          </Box>{" "}
-          <Box className="border-2 border-purple rounded-xl text-purple shadow-md shadow-focusZone items-center h-min flex justify-between">
-            <img
-              style={{ margin: 0 }}
-              className="h-[70px]"
-              src="/assets/slides/0800/img/biurko-sideview.png"
-            />
-            <Typography>cupcakes</Typography>
-            <Typography>09.06.2018</Typography>
-            <Box className="flex">
-              <Button>dsa</Button>
-              <Button>dsa</Button>
-            </Box>
-            <Button>Play</Button>
-          </Box>{" "}
-          <Box className="border-2 border-purple rounded-xl text-purple shadow-md shadow-focusZone items-center h-min flex justify-between">
-            <img
-              style={{ margin: 0 }}
-              className="h-[70px]"
-              src="/assets/slides/0800/img/biurko-sideview.png"
-            />
-            <Typography>cupcakes</Typography>
-            <Typography>09.06.2018</Typography>
-            <Box className="flex">
-              <Button>dsa</Button>
-              <Button>dsa</Button>
-            </Box>
-            <Button>Play</Button>
-          </Box>{" "}
-          <Box className="border-2 border-purple rounded-xl text-purple shadow-md shadow-focusZone items-center h-min flex justify-between">
-            <img
-              style={{ margin: 0 }}
-              className="h-[70px]"
-              src="/assets/slides/0800/img/biurko-sideview.png"
-            />
-            <Typography>cupcakes</Typography>
-            <Typography>09.06.2018</Typography>
-            <Box className="flex">
-              <Button>dsa</Button>
-              <Button>dsa</Button>
-            </Box>
-            <Button>Play</Button>
-          </Box>{" "}
-          <Box className="border-2 border-purple rounded-xl text-purple shadow-md shadow-focusZone items-center h-min flex justify-between">
-            <img
-              style={{ margin: 0 }}
-              className="h-[70px]"
-              src="/assets/slides/0800/img/biurko-sideview.png"
-            />
-            <Typography>cupcakes</Typography>
-            <Typography>09.06.2018</Typography>
-            <Box className="flex">
-              <Button>dsa</Button>
-              <Button>dsa</Button>
-            </Box>
-            <Button>Play</Button>
-          </Box>{" "}
-          <Box className="border-2 border-purple rounded-xl text-purple shadow-md shadow-focusZone items-center h-min flex justify-between">
-            <img
-              style={{ margin: 0 }}
-              className="h-[70px]"
-              src="/assets/slides/0800/img/biurko-sideview.png"
-            />
-            <Typography>cupcakes</Typography>
-            <Typography>09.06.2018</Typography>
-            <Box className="flex">
-              <Button>dsa</Button>
-              <Button>dsa</Button>
-            </Box>
-            <Button>Play</Button>
-          </Box>{" "}
-          <Box className="border-2 border-purple rounded-xl text-purple shadow-md shadow-focusZone items-center h-min flex justify-between">
-            <img
-              style={{ margin: 0 }}
-              className="h-[70px]"
-              src="/assets/slides/0800/img/biurko-sideview.png"
+              src={
+                getAbsolutePath().coreUrl +
+                "/assets/slides/backgrounds/biurko-sideview.png"
+              }
             />
             <Typography>cupcakes</Typography>
             <Typography>09.06.2018</Typography>

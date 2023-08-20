@@ -10,7 +10,7 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@cenk1cenk2-presentations/react-reveal-base": "^2.0.0",
@@ -19,11 +19,14 @@
     "@lottiefiles/react-lottie-player": "^3.5.3",
     "@mui/material": "^5.13.6",
     "@reduxjs/toolkit": "^1.9.5",
+    "classnames": "^2.3.2",
     "gsap": "^3.12.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.9.0",
     "react-redux": "^8.1.1",
+    "react-stacked-center-carousel": "^1.0.12",
+    "react-swipeable": "^7.0.1",
     "reveal.js": "^4.5.0"
   },
   "devDependencies": {

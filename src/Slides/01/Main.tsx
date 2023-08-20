@@ -3,6 +3,7 @@ import { gsap } from "gsap";
 import useSynchronizeWithReveal from "../../hooks/useSynchronizeWithReveal.tsx";
 import { Avatar, Box, Grid, Typography } from "@mui/material";
 import Slide from "@cenk1cenk2-presentations/react-reveal-base/dist/components/Slide";
+import { getAbsolutePath } from "../../utils/functions.ts";
 
 const Main = () => {
   const { slideCords } = useSynchronizeWithReveal();
@@ -103,11 +104,13 @@ const Main = () => {
 
   return (
     <Slide
-      backgroundImage={"/assets/slides/0000/img/bgred.png"}
+      backgroundImage={
+        getAbsolutePath().coreUrl + "/assets/slides/backgrounds/bgred.png"
+      }
       className="h-[80%] inset-0 absolute z-40"
     >
       <Grid container className="h-full">
-        <Grid xs={3} item ref={leftCol} className=" flex items-end">
+        <Grid xs={3} item ref={leftCol} className="flex items-end">
           <Box className="flex flex-col items-center justify-end w-[80%] mb-32">
             <div>
               <Avatar
@@ -115,7 +118,10 @@ const Main = () => {
                   width: 120,
                   height: 120,
                 }}
-                src="/assets/slides/0000/img/stolik_pileczki_gora.png"
+                src={
+                  getAbsolutePath().coreUrl +
+                  "/assets/slides/0000/img/stolik_pileczki_gora.png"
+                }
               />
             </div>
             <div className="flex flex-col">
@@ -139,7 +145,10 @@ const Main = () => {
               <div ref={elon} className="z-10 relative">
                 <img
                   className="w-[400px]"
-                  src="/assets/slides/0000/img/Pozycja_1.png"
+                  src={
+                    getAbsolutePath().coreUrl +
+                    "/assets/slides/0000/img/Pozycja_1.png"
+                  }
                 />
               </div>
               <div
@@ -149,7 +158,10 @@ const Main = () => {
               >
                 <img
                   className="h-[350px]"
-                  src="/assets/slides/0000/img/puchar.png"
+                  src={
+                    getAbsolutePath().coreUrl +
+                    "/assets/slides/0000/img/puchar.png"
+                  }
                 />
               </div>
               <div
@@ -159,7 +171,10 @@ const Main = () => {
               >
                 <img
                   className="h-[130px]"
-                  src="/assets/slides/0000/img/pileczki.png"
+                  src={
+                    getAbsolutePath().coreUrl +
+                    "/assets/slides/0000/img/pileczki.png"
+                  }
                 />
               </div>
               <div
@@ -169,7 +184,10 @@ const Main = () => {
               >
                 <img
                   className="h-[300px]"
-                  src="/assets/slides/0000/img/stolik_z_pileczkami.png"
+                  src={
+                    getAbsolutePath().coreUrl +
+                    "/assets/slides/0000/img/stolik_z_pileczkami.png"
+                  }
                 />
               </div>
               <div
@@ -177,21 +195,36 @@ const Main = () => {
                 className="absolute z-20"
                 style={{ left: "80px", bottom: 80 }}
               >
-                <Avatar src="/assets/slides/0000/img/icon_volume.svg" />
+                <Avatar
+                  src={
+                    getAbsolutePath().coreUrl +
+                    "/assets/slides/icons/icon_volume.svg"
+                  }
+                />
               </div>
               <div
                 ref={icon2}
                 className="absolute z-20"
                 style={{ right: "105px", bottom: 90 }}
               >
-                <Avatar src="/assets/slides/0000/img/icon_list.svg" />
+                <Avatar
+                  src={
+                    getAbsolutePath().coreUrl +
+                    "/assets/slides/icons/icon_list.svg"
+                  }
+                />
               </div>
               <div
                 ref={icon3}
                 className="absolute z-20"
                 style={{ right: "90px", top: 170 }}
               >
-                <Avatar src="/assets/slides/0000/img/icon_play.svg" />
+                <Avatar
+                  src={
+                    getAbsolutePath().coreUrl +
+                    "/assets/slides/icons/icon_play.svg"
+                  }
+                />
               </div>
             </div>
           </Box>

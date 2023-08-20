@@ -21,21 +21,22 @@ const IconWrapper = ({
   height,
   width,
 }: Props) => {
-  return (
-    <div
-      className={className + " animate-pulse animate-bounce absolute"}
-      ref={innerRef}
-      style={{
-        width: width,
-        height: height,
-        top: y + "px",
-        left: x + "px",
-        zIndex: z,
-      }}
-    >
-      {children}
-    </div>
-  );
+
+return (
+  <div
+    className={className + " absolute"}
+    ref={innerRef}
+    style={{
+      width: width,
+      height: height,
+      top: y + "px",
+      left: x + "px",
+      zIndex: z,
+    }}
+  >
+    {children}
+  </div>
+);
 };
 
 export default IconWrapper;

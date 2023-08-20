@@ -4,6 +4,7 @@ import { useLayoutEffect, useRef } from "react";
 import IconWrapper from "../../components/IconWrapper";
 import { gsap } from "gsap";
 import useSynchronizeWithReveal from "../../hooks/useSynchronizeWithReveal";
+import { getAbsolutePath } from "../../utils/functions";
 
 const Mtc07Main = () => {
   useSynchronizeWithReveal();
@@ -56,7 +57,12 @@ const Mtc07Main = () => {
   });
 
   return (
-    <Slide backgroundImage="/assets/slides/0500/img/biurko-sideview.png">
+    <Slide
+      backgroundImage={
+        getAbsolutePath().coreUrl +
+        "/assets/slides/backgrounds/biurko-sideview.png"
+      }
+    >
       <Box>
         <div
           ref={text1}
@@ -91,15 +97,23 @@ const Mtc07Main = () => {
       </Box>
 
       <IconWrapper innerRef={icon_volume} width={45} x={500} y={20}>
-        <img src="/assets/slides/0000/img/icon_volume.svg" />
+        <img
+          src={
+            getAbsolutePath().coreUrl + "/assets/slides/icons/icon_volume.svg"
+          }
+        />
       </IconWrapper>
 
       <IconWrapper innerRef={icon_list} width={45} x={450} y={150}>
-        <img src="/assets/slides/0000/img/icon_list.svg" />
+        <img
+          src={getAbsolutePath().coreUrl + "/assets/slides/icons/icon_list.svg"}
+        />
       </IconWrapper>
 
       <IconWrapper innerRef={icon_play} width={45} x={470} y={330}>
-        <img src="/assets/slides/0000/img/icon_play.svg" />
+        <img
+          src={getAbsolutePath().coreUrl + "/assets/slides/icons/icon_play.svg"}
+        />
       </IconWrapper>
     </Slide>
   );

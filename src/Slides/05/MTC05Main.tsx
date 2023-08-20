@@ -4,6 +4,7 @@ import { Box, Typography } from "@mui/material";
 import { gsap } from "gsap";
 import { useLayoutEffect, useRef } from "react";
 import useSynchronizeWithReveal from "../../hooks/useSynchronizeWithReveal";
+import { getAbsolutePath } from "../../utils/functions";
 
 const Mtc05Main = () => {
   useSynchronizeWithReveal();
@@ -77,31 +78,48 @@ const Mtc05Main = () => {
   });
 
   return (
-    <Slide backgroundImage="/assets/slides/0400/img/redbg4.png">
+    <Slide
+      backgroundImage={
+        getAbsolutePath().coreUrl + "/assets/slides/0400/img/redbg4.png"
+      }
+    >
       <div ref={elon} className="absolute bottom-[100px] left-0">
         <img
           className="w-[400px]"
-          src="/assets/slides/0000/img/Pozycja_1.png"
+          src={
+            getAbsolutePath().coreUrl + "/assets/slides/0000/img/Pozycja_1.png"
+          }
         />
       </div>
 
       <div ref={table} className="absolute left-[100px] bottom-0">
         <img
           className="w-[600px]"
-          src="/assets/slides/0400/img/stolik_z_pucharem.png"
+          src={
+            getAbsolutePath().coreUrl +
+            "/assets/slides/0400/img/stolik_z_pucharem.png"
+          }
         />
       </div>
 
       <IconWrapper innerRef={icon_volume} width="40px" x={500} y={200}>
-        <img src="/assets/slides/0000/img/icon_volume.svg" />
+        <img
+          src={
+            getAbsolutePath().coreUrl + "/assets/slides/icons/icon_volume.svg"
+          }
+        />
       </IconWrapper>
 
       <IconWrapper innerRef={icon_list} width="40px" x={600} y={300}>
-        <img src="/assets/slides/0000/img/icon_list.svg" />
+        <img
+          src={getAbsolutePath().coreUrl + "/assets/slides/icons/icon_list.svg"}
+        />
       </IconWrapper>
 
       <IconWrapper innerRef={icon_play} width="40px" x={520} y={400}>
-        <img src="/assets/slides/0000/img/icon_play.svg" />
+        <img
+          src={getAbsolutePath().coreUrl + "/assets/slides/icons/icon_play.svg"}
+        />
       </IconWrapper>
       <Box className="w-[250px] absolute right-0 bottom-[150px]">
         <Typography ref={prizesHeader} variant="h4" id="nagrody_header_0400">

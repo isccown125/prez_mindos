@@ -4,9 +4,10 @@ import useSynchronizeWithReveal from "../../hooks/useSynchronizeWithReveal.tsx";
 import { Box, Typography } from "@mui/material";
 import SectionContent from "../../components/reveal-components/SectionContent.tsx";
 import { Slide } from "@cenk1cenk2-presentations/react-reveal-base";
+import { getAbsolutePath } from "../../utils/functions.ts";
 
 const Balls = () => {
-   const {slideCords} = useSynchronizeWithReveal();
+  const { slideCords } = useSynchronizeWithReveal();
   const balls = useRef<HTMLDivElement>(null);
   const yellowBG = useRef<HTMLDivElement>(null);
   const ballsHeader = useRef<HTMLDivElement>(null);
@@ -14,52 +15,60 @@ const Balls = () => {
   const monoBalls = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    const {indexh, indexv} = slideCords;
-   
-          const ctx = gsap.context(() => {
-             if(indexh === 0 && indexv === 1){
-      const tl = gsap.timeline({ delay: 0.2 });
-      tl.from(balls.current, {
-        duration: 1,
-        opacity: 0,
-        x: 250,
-        y: 200,
-        scale: 0.36,
-      });
+    const { indexh, indexv } = slideCords;
 
-      const tl2 = gsap.timeline({ delay: 0.2 });
-      tl2.from(yellowBG.current, { duration: 0.8, x: 1000 });
+    const ctx = gsap.context(() => {
+      if (indexh === 0 && indexv === 1) {
+        const tl = gsap.timeline({ delay: 0.2 });
+        tl.from(balls.current, {
+          duration: 1,
+          opacity: 0,
+          x: 250,
+          y: 200,
+          scale: 0.36,
+        });
 
-      const tl3 = gsap.timeline({ delay: 0.6 });
-      tl3.from(ballsHeader.current, { duration: 0.7, x: 200 });
+        const tl2 = gsap.timeline({ delay: 0.2 });
+        tl2.from(yellowBG.current, { duration: 0.8, x: 1000 });
 
-      const tl4 = gsap.timeline({ delay: 0.8 });
-      tl4.from(ballsDescription.current, { duration: 0.8, x: 150 });
+        const tl3 = gsap.timeline({ delay: 0.6 });
+        tl3.from(ballsHeader.current, { duration: 0.7, x: 200 });
 
-      const tl5 = gsap.timeline({ delay: 0.6 });
-      tl5.from(monoBalls.current, { duration: 0.8, x: 100 });
-          }
+        const tl4 = gsap.timeline({ delay: 0.8 });
+        tl4.from(ballsDescription.current, { duration: 0.8, x: 150 });
+
+        const tl5 = gsap.timeline({ delay: 0.6 });
+        tl5.from(monoBalls.current, { duration: 0.8, x: 100 });
+      }
     });
     return () => ctx.revert();
-
-
-  },[slideCords]);
+  }, [slideCords]);
 
   return (
-    <Slide backgroundImage={"/assets/slides/0000/img/bgred.png"}>
+    <Slide
+      backgroundImage={
+        getAbsolutePath().coreUrl + "/assets/slides/backgrounds/bgred.png"
+      }
+    >
       <SectionContent>
         <Box className="flex h-full">
           <div ref={balls} className="w-full flex justify-center items-center ">
             <img
               className="h-[350px]"
-              src="/assets/slides/0001/img/pileczki.png"
+              src={
+                getAbsolutePath().coreUrl +
+                "/assets/slides/0001/img/pileczki.png"
+              }
             />
           </div>
           <div ref={yellowBG} className="bg-yellow h-full w-[60%] px-6">
             <div ref={monoBalls} className="h-[160px] relative">
               <img
                 className="w-[170px] absolute -bottom-14 -right-4"
-                src="/assets/slides/0001/img/pileczki-monokolor.png"
+                src={
+                  getAbsolutePath().coreUrl +
+                  "/assets/slides/0001/img/pileczki-monokolor.png"
+                }
               />
             </div>
             <Typography

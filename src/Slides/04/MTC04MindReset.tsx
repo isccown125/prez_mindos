@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import { useRef, useLayoutEffect } from "react";
 import useSynchronizeWithReveal from "../../hooks/useSynchronizeWithReveal.tsx";
 import { Slide } from "@cenk1cenk2-presentations/react-reveal-base";
+import { getAbsolutePath } from "../../utils/functions.ts";
 
 const Mtc04MindReset = () => {
   useSynchronizeWithReveal();
@@ -76,24 +77,34 @@ const Mtc04MindReset = () => {
   });
 
   return (
-    <Slide backgroundImage="/assets/slides/0300/img/bgblue.png">
+    <Slide
+      backgroundImage={
+        getAbsolutePath().coreUrl + "/assets/slides/0300/img/bgblue.png"
+      }
+    >
       <SectionContent>
         <div ref={icon1} className="absolute top-[150px] z-30 left-[350px]">
           <img
             className="w-[40px]"
-            src="/assets/slides/0000/img/icon_volume.svg"
+            src={
+              getAbsolutePath().coreUrl + "/assets/slides/icons/icon_volume.svg"
+            }
           />
         </div>
         <div ref={icon2} className="absolute z-30 bottom-[150px] right-[200px]">
           <img
             className="w-[40px]"
-            src="/assets/slides/0000/img/icon_list.svg"
+            src={
+              getAbsolutePath().coreUrl + "/assets/slides/icons/icon_list.svg"
+            }
           />
         </div>
         <div ref={icon3} className="absolute z-30 bottom-[40px] left-[200px]">
           <img
             className="w-[40px]"
-            src="/assets/slides/0000/img/icon_play.svg"
+            src={
+              getAbsolutePath().coreUrl + "/assets/slides/icons/icon_play.svg"
+            }
           />
         </div>
         <Box
@@ -119,13 +130,19 @@ const Mtc04MindReset = () => {
         >
           <img
             className="w-[500px]"
-            src="/assets/slides/0300/img/fotel-fronview-sluchawki.png"
+            src={
+              getAbsolutePath().coreUrl +
+              "/assets/slides/0300/img/fotel-fronview-sluchawki.png"
+            }
           />
         </div>
         <div className="absolute bottom-[-80px] right-[200px]" ref={elon}>
           <img
             className="w-[450px]"
-            src="/assets/slides/0000/img/Pozycja_1.png"
+            src={
+              getAbsolutePath().coreUrl +
+              "/assets/slides/0000/img/Pozycja_1.png"
+            }
           />
         </div>
       </SectionContent>

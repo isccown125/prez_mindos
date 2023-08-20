@@ -15,7 +15,6 @@ const useSynchronizeWithReveal = () => {
     });
   }, []);
 
-  console.log(slideCords)
   return {
     slideCords,
   };
