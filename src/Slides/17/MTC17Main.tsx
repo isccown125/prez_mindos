@@ -4,10 +4,11 @@ import {
   StackedCarousel,
   ResponsiveContainer,
 } from "react-stacked-center-carousel";
-
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useLayoutEffect } from "react";
 import CaruselItemMTC17 from "../../components/carusels/CaruselItemMTC17";
 import OutlineButton from "../../components/buttons/OutlineButton";
+import { gsap } from "gsap";
+import useSynchronizeWithReveal from "../../hooks/useSynchronizeWithReveal";
 
 const data = [
   {
@@ -29,6 +30,40 @@ const MTC17Main = () => {
   const [currentCenterIndex, setCurrentCenterIndex] = useState<
     number | undefined
   >(0);
+  useSynchronizeWithReveal();
+
+  const tableWithElonAndEdwart = useRef<HTMLDivElement>(null);
+  const light = useRef<HTMLDivElement>(null);
+  const rightCol = useRef<HTMLDivElement>(null);
+  const content = useRef<HTMLDivElement>(null);
+  const button1 = useRef<HTMLButtonElement>(null);
+  const button2 = useRef<HTMLButtonElement>(null);
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl1 = gsap.timeline({ delay: 0.4 });
+      const tl2 = gsap.timeline({ delay: 1 });
+      tl1
+        .from(tableWithElonAndEdwart.current, {
+          x: -300,
+          opacity: 0,
+          duration: 0.8,
+          ease: "back.out(4)",
+        })
+        .from(light.current, { duration: 0.8, y: -300, opacity: 0 });
+      tl2
+        .from(rightCol.current, {
+          duration: 0.5,
+          x: 300,
+          scale: 0,
+          opacity: 0,
+        })
+        .from(content.current, { scale: 0, opacity: 0 })
+        .from(button1.current, { scale: 0, opacity: 0, x: -200 })
+        .from(button2.current, { scale: 0, opacity: 0, x: 200 });
+    });
+    return () => ctx.revert();
+  }, []);
 
   useEffect(() => {
     console.log(currentCenterIndex);
@@ -47,7 +82,10 @@ const MTC17Main = () => {
           "/assets/slides/backgrounds/bg-darkblue.png",
       ]}
     >
-      <div className="absolute bottom-[-100px] left-[-350px] w-[1400px]">
+      <div
+        ref={tableWithElonAndEdwart}
+        className="absolute bottom-[-100px] left-[-350px] w-[1400px]"
+      >
         <img
           style={{ width: "1500px" }}
           src={
@@ -56,15 +94,21 @@ const MTC17Main = () => {
           }
         />
       </div>
-      <div className="absolute left-[400px] top-[-100px]">
+      <div ref={light} className="absolute left-[400px] top-[-100px]">
         <img
           className="w-[40px]"
           src={getAbsolutePath().coreUrl + "/assets/slides/1700/light.png"}
         />
       </div>
 
-      <div className="bg-yellow w-[350px] h-[80%] translate-y-center absolute right-0">
-        <div className="relative w-full flex items-center justify-center mt-5">
+      <div
+        ref={rightCol}
+        className="bg-yellow w-[350px] h-[80%] top-[50px] absolute right-0"
+      >
+        <div
+          ref={content}
+          className="relative w-full flex items-center justify-center mt-5"
+        >
           <ResponsiveContainer
             carouselRef={caruselRef}
             render={(parentWidth, caruselRef) => {
@@ -99,12 +143,14 @@ const MTC17Main = () => {
 
                   <div className="flex gap-2 justify-center items-center">
                     <OutlineButton
+                      ref={button1}
                       className="text-[18px]"
                       onClick={() => caruselRef?.current?.goBack()}
                     >
                       POPRZEDNI
                     </OutlineButton>
                     <OutlineButton
+                      ref={button2}
                       onClick={() => caruselRef?.current?.goNext()}
                       className="text-[18px]"
                     >

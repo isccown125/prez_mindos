@@ -1,11 +1,16 @@
 import { Slide } from "@cenk1cenk2-presentations/react-reveal-base";
-import { useRef } from "react";
+import { useRef, useLayoutEffect, useState } from "react";
+import { gsap } from "gsap";
 import {
   StackedCarousel,
   ResponsiveContainer,
 } from "react-stacked-center-carousel";
 import { getAbsolutePath } from "../../utils/functions";
 import CaruselItem from "../../components/carusels/CaruselItem";
+import { IconButton } from "@mui/material";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import useSynchronizeWithReveal from "../../hooks/useSynchronizeWithReveal";
 
 const data = [
   {
@@ -36,7 +41,22 @@ const data = [
 ];
 
 const MTC04Mindos = () => {
+  const [activeSlide, setActiveSlide] = useState<number>(0);
+
+  useSynchronizeWithReveal();
+
   const caruselRef = useRef();
+
+  const carusel = useRef<HTMLDivElement>(null);
+  const pagination = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl1 = gsap.timeline({ delay: 1 });
+      tl1.from(carusel.current, { opacity: 0 });
+    });
+    return () => ctx.revert();
+  }, []);
 
   return (
     <Slide
@@ -44,21 +64,50 @@ const MTC04Mindos = () => {
         getAbsolutePath().coreUrl + "/assets/slides/backgrounds/bg-green.png"
       }
     >
-      <div className="relative z-30 flex h-full items-center justify-center">
+      <div
+        ref={carusel}
+        className="relative z-30 flex h-full items-center justify-center"
+      >
         <ResponsiveContainer
           carouselRef={caruselRef}
           render={(parentWidth, caruselRef) => (
-            <StackedCarousel
-              fadeDistance={0}
-              height={400}
-              ref={caruselRef}
-              carouselWidth={parentWidth}
-              maxVisibleSlide={5}
-              slideWidth={350}
-              slideComponent={CaruselItem}
-              data={data}
-              useGrabCursor={false}
-            />
+            <>
+              <StackedCarousel
+                fadeDistance={0}
+                height={400}
+                ref={caruselRef}
+                carouselWidth={parentWidth}
+                maxVisibleSlide={5}
+                slideWidth={350}
+                slideComponent={CaruselItem}
+                data={data}
+                useGrabCursor={false}
+                onActiveSlideChange={(activeSlide) => {
+                  setActiveSlide(activeSlide);
+                }}
+              />
+              <div
+                ref={pagination}
+                className="flex gap-1 justify-center items-center"
+              >
+                <IconButton onClick={() => caruselRef?.current?.goBack()}>
+                  <ArrowBackIosIcon />
+                </IconButton>
+                <div className="flex gap-5">
+                  {data.map((_, index) => (
+                    <div
+                      className={`w-[10px] h-[10px] ${
+                        activeSlide === index ? "bg-yellow" : "bg-black"
+                      } rounded-[50%]`}
+                    ></div>
+                  ))}
+                </div>
+
+                <IconButton onClick={() => caruselRef?.current?.goNext()}>
+                  <ArrowForwardIosIcon />
+                </IconButton>
+              </div>
+            </>
           )}
         />
       </div>

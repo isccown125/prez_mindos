@@ -17,6 +17,7 @@ import MTC15Main from "./Slides/15/MTC15Main.tsx";
 import MTC16Main from "./Slides/16/MTC16Main.tsx";
 import MTC17Main from "./Slides/17/MTC17Main.tsx";
 import MTC18Main from "./Slides/18/MTC18Main.tsx";
+import MTC19Main from "./Slides/19/MTC19Main.tsx";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
       <MTC16Main />
       <MTC17Main />
       <MTC18Main />
+      <MTC19Main />
     </Deck>
   );
 }

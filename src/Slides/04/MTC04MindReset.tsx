@@ -7,6 +7,7 @@ import { Slide } from "@cenk1cenk2-presentations/react-reveal-base";
 import { getAbsolutePath } from "../../utils/functions.ts";
 
 const Mtc04MindReset = () => {
+
   useSynchronizeWithReveal();
 
   const elon = useRef<HTMLDivElement>(null);
