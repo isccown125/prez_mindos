@@ -5,10 +5,11 @@ import { useRef, useLayoutEffect } from "react";
 import useSynchronizeWithReveal from "../../hooks/useSynchronizeWithReveal.tsx";
 import { Slide } from "@cenk1cenk2-presentations/react-reveal-base";
 import { getAbsolutePath } from "../../utils/functions.ts";
+import useAnimate from "../../hooks/useAnimate.tsx";
 
 const Mtc04MindReset = () => {
-
   useSynchronizeWithReveal();
+  const { animate, showContent } = useAnimate(3, 0);
 
   const elon = useRef<HTMLDivElement>(null);
   const fotel = useRef<HTMLDivElement>(null);
@@ -21,6 +22,8 @@ const Mtc04MindReset = () => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      if (!animate.current) return;
+      animate.current = false;
       const tl = gsap.timeline({ delay: 0.2 });
       const tl2 = gsap.timeline({ delay: 0.35 });
       const tl3 = gsap.timeline({ delay: 0.8 });
@@ -83,70 +86,76 @@ const Mtc04MindReset = () => {
         getAbsolutePath().coreUrl + "/assets/slides/0300/img/bgblue.png"
       }
     >
-      <SectionContent>
-        <div ref={icon1} className="absolute top-[150px] z-30 left-[350px]">
-          <img
-            className="w-[40px]"
-            src={
-              getAbsolutePath().coreUrl + "/assets/slides/icons/icon_volume.svg"
-            }
-          />
-        </div>
-        <div ref={icon2} className="absolute z-30 bottom-[150px] right-[200px]">
-          <img
-            className="w-[40px]"
-            src={
-              getAbsolutePath().coreUrl + "/assets/slides/icons/icon_list.svg"
-            }
-          />
-        </div>
-        <div ref={icon3} className="absolute z-30 bottom-[40px] left-[200px]">
-          <img
-            className="w-[40px]"
-            src={
-              getAbsolutePath().coreUrl + "/assets/slides/icons/icon_play.svg"
-            }
-          />
-        </div>
-        <Box
-          ref={left_col}
-          className="absolute right-[0] bottom-[200px] w-[320px] text-left"
-        >
-          <Typography
-            style={{ textTransform: "none" }}
-            variant="h4"
-            fontWeight="bold"
+      {showContent.current && (
+        <SectionContent>
+          <div ref={icon1} className="absolute top-[150px] z-30 left-[350px]">
+            <img
+              className="w-[40px]"
+              src={
+                getAbsolutePath().coreUrl +
+                "/assets/slides/icons/icon_volume.svg"
+              }
+            />
+          </div>
+          <div
+            ref={icon2}
+            className="absolute z-30 bottom-[150px] right-[200px]"
           >
-            Strefa relaksu
-          </Typography>
-          <Typography>
-            Opis - czym się zajmuje Fitness Mózgu? Kliknij w play i przekonaj
-            się, że uczenie się było do tej pory błędnie robione.
-          </Typography>
-        </Box>
-        <div
-          ref={fotel}
-          className="absolute right-[220px] bottom-[-200px]"
-          style={{ transform: "translateX(-50%)" }}
-        >
-          <img
-            className="w-[500px]"
-            src={
-              getAbsolutePath().coreUrl +
-              "/assets/slides/0300/img/fotel-fronview-sluchawki.png"
-            }
-          />
-        </div>
-        <div className="absolute bottom-[-80px] right-[200px]" ref={elon}>
-          <img
-            className="w-[450px]"
-            src={
-              getAbsolutePath().coreUrl +
-              "/assets/slides/0000/img/Pozycja_1.png"
-            }
-          />
-        </div>
-      </SectionContent>
+            <img
+              className="w-[40px]"
+              src={
+                getAbsolutePath().coreUrl + "/assets/slides/icons/icon_list.svg"
+              }
+            />
+          </div>
+          <div ref={icon3} className="absolute z-30 bottom-[40px] left-[200px]">
+            <img
+              className="w-[40px]"
+              src={
+                getAbsolutePath().coreUrl + "/assets/slides/icons/icon_play.svg"
+              }
+            />
+          </div>
+          <Box
+            ref={left_col}
+            className="absolute right-[0] bottom-[200px] w-[320px] text-left"
+          >
+            <Typography
+              style={{ textTransform: "none" }}
+              variant="h4"
+              fontWeight="bold"
+            >
+              Strefa relaksu
+            </Typography>
+            <Typography>
+              Opis - czym się zajmuje Fitness Mózgu? Kliknij w play i przekonaj
+              się, że uczenie się było do tej pory błędnie robione.
+            </Typography>
+          </Box>
+          <div
+            ref={fotel}
+            className="absolute right-[220px] bottom-[-200px]"
+            style={{ transform: "translateX(-50%)" }}
+          >
+            <img
+              className="w-[500px]"
+              src={
+                getAbsolutePath().coreUrl +
+                "/assets/slides/0300/img/fotel-fronview-sluchawki.png"
+              }
+            />
+          </div>
+          <div className="absolute bottom-[-80px] right-[200px]" ref={elon}>
+            <img
+              className="w-[450px]"
+              src={
+                getAbsolutePath().coreUrl +
+                "/assets/slides/0000/img/Pozycja_1.png"
+              }
+            />
+          </div>
+        </SectionContent>
+      )}
     </Slide>
   );
 };

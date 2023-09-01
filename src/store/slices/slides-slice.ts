@@ -5,6 +5,7 @@ type state = {
   currentStatePresentation: ReturnType<typeof getState>;
 };
 
+
 const initialState: state = {
   currentStatePresentation: {
     indexf: 0,

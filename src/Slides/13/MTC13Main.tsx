@@ -5,9 +5,13 @@ import HexagonChart from "../../components/charts/hexagon-chart/HexagonChart";
 import { useRef, useLayoutEffect } from "react";
 import useSynchronizeWithReveal from "../../hooks/useSynchronizeWithReveal";
 import { gsap } from "gsap";
+import useAnimate from "../../hooks/useAnimate";
+import SectionContent from "../../components/reveal-components/SectionContent";
 
 const MTC13Main = () => {
   useSynchronizeWithReveal();
+  const { animate, showContent } = useAnimate(12, 0);
+
   const hexagon = useRef<HTMLDivElement>(null);
   const fillChart1 = useRef<HTMLDivElement>(null);
   const fillChart2 = useRef<HTMLDivElement>(null);
@@ -21,6 +25,8 @@ const MTC13Main = () => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      if (!animate.current) return;
+      animate.current = false;
       const tl1 = gsap.timeline({ delay: 1 });
       const tl2 = gsap.timeline({ delay: 3 });
       const tl3 = gsap.timeline({ delay: 3 });
@@ -52,54 +58,64 @@ const MTC13Main = () => {
         getAbsolutePath().coreUrl + "/assets/slides/backgrounds/bg-green.png"
       }
     >
-      <div>
-        <div ref={hexagon} className="absolute top-[-200px] left-0 z-10">
-          <img
-            className="h-[1000px]"
-            src={getAbsolutePath().coreUrl + "/assets/slides/1300/hexagon.png"}
-          />
-        </div>
-        <Box className="absolute z-20 text-left right-[100px] top-[140px]">
-          <Typography ref={header} variant="h4">
-            Umiejętności
-          </Typography>
-          <Typography ref={body}>
-            Hexagony z umiejętnościami - fajna edukacja <br /> wybrać 5
-            przykładowych umiejętności do heksagonu
-          </Typography>
-        </Box>
-        <Box
-          ref={chartBg}
-          className="bg-yellow w-[550px] h-[280px] absolute right-[20px] bottom-[60px] rounded-xl"
-        >
-          <div
-            ref={chartContainer}
-            className="flex flex-col w-full h-full items-end justify-center pr-[50px] gap-2"
-          >
-            <HexagonChart
-              fillRef={fillChart1}
-              label="Podstawowe informacje"
-              fill={52}
-            />
-            <HexagonChart fillRef={fillChart2} label="Koncentracja" fill={15} />
-            <HexagonChart
-              fillRef={fillChart3}
-              label="Sztuka robienia Sushi"
-              fill={23}
-            />
-            <HexagonChart
-              fillRef={fillChart4}
-              label="Robienie kebabów"
-              fill={0}
-            />
-            <HexagonChart
-              fillRef={fillChart5}
-              label="Organizacja pracy w kuchni"
-              fill={35}
-            />
+      {showContent.current && (
+        <SectionContent>
+          <div>
+            <div ref={hexagon} className="absolute top-[-200px] left-0 z-10">
+              <img
+                className="h-[1000px]"
+                src={
+                  getAbsolutePath().coreUrl + "/assets/slides/1300/hexagon.png"
+                }
+              />
+            </div>
+            <Box className="absolute z-20 text-left right-[100px] top-[140px]">
+              <Typography ref={header} variant="h4">
+                Umiejętności
+              </Typography>
+              <Typography ref={body}>
+                Hexagony z umiejętnościami - fajna edukacja <br /> wybrać 5
+                przykładowych umiejętności do heksagonu
+              </Typography>
+            </Box>
+            <Box
+              ref={chartBg}
+              className="bg-yellow w-[550px] h-[280px] absolute right-[20px] bottom-[60px] rounded-xl"
+            >
+              <div
+                ref={chartContainer}
+                className="flex flex-col w-full h-full items-end justify-center pr-[50px] gap-2"
+              >
+                <HexagonChart
+                  fillRef={fillChart1}
+                  label="Podstawowe informacje"
+                  fill={52}
+                />
+                <HexagonChart
+                  fillRef={fillChart2}
+                  label="Koncentracja"
+                  fill={15}
+                />
+                <HexagonChart
+                  fillRef={fillChart3}
+                  label="Sztuka robienia Sushi"
+                  fill={23}
+                />
+                <HexagonChart
+                  fillRef={fillChart4}
+                  label="Robienie kebabów"
+                  fill={0}
+                />
+                <HexagonChart
+                  fillRef={fillChart5}
+                  label="Organizacja pracy w kuchni"
+                  fill={35}
+                />
+              </div>
+            </Box>
           </div>
-        </Box>
-      </div>
+        </SectionContent>
+      )}
     </Slide>
   );
 };

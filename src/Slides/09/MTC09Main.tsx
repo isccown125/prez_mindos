@@ -5,9 +5,12 @@ import { getAbsolutePath } from "../../utils/functions";
 import { gsap } from "gsap";
 import { useRef, useLayoutEffect } from "react";
 import IconWrapper from "../../components/IconWrapper";
+import useAnimate from "../../hooks/useAnimate";
+import SectionContent from "../../components/reveal-components/SectionContent";
 
 const MTC09Main = () => {
   useSynchronizeWithReveal();
+  const { animate, showContent } = useAnimate(8, 0);
 
   const edwart = useRef<HTMLDivElement>(null);
   const sunbed = useRef<HTMLDivElement>(null);
@@ -18,6 +21,8 @@ const MTC09Main = () => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      if (!animate.current) return;
+      animate.current = false;
       const tl1 = gsap.timeline({ delay: 1 });
       const tl4 = gsap.timeline({ delay: 1 });
       const tl2 = gsap.timeline({ delay: 1.4 });
@@ -56,46 +61,50 @@ const MTC09Main = () => {
       backgroundSize="180%"
       backgroundPosition="30% 90%"
     >
-      <div ref={sunbed} className="absolute bottom-[-50px] right-[-155px]">
-        <img
-          className="h-[750px]"
-          src={getAbsolutePath().coreUrl + "/assets/slides/0900/lezak.png"}
-        />
-      </div>
-      <div ref={edwart} className=" bottom-[-60px] right-[100px] absolute">
-        <img
-          className="w-[250px]"
-          src={getAbsolutePath().coreUrl + "/assets/slides/0900/Edwart.png"}
-        />
-      </div>
-      <IconWrapper
-        innerRef={icon_volume}
-        width={50}
-        height={50}
-        x={500}
-        y={400}
-      >
-        <img
-          src={
-            getAbsolutePath().coreUrl + "/assets/slides/icons/icon_volume.svg"
-          }
-          alt=""
-        />
-      </IconWrapper>
-      <Box
-        ref={text_container}
-        className="absolute left-[0px] bottom-[90px] w-[360px] text-left"
-      >
-        <Typography ref={header} variant="h4">
-          Poznaj Edwarta
-        </Typography>
-        <Typography ref={body}>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate
-          vero odit deleniti, molestias explicabo eos dolorem, dignissimos
-          tempora laudantium sapiente est ducimus praesentium sequi ipsum,
-          tenetur quod reiciendis cumque commodi?
-        </Typography>
-      </Box>
+      {showContent.current && (
+        <SectionContent>
+          <div ref={sunbed} className="absolute bottom-[-50px] right-[-155px]">
+            <img
+              className="h-[750px]"
+              src={getAbsolutePath().coreUrl + "/assets/slides/0900/lezak.png"}
+            />
+          </div>
+          <div ref={edwart} className=" bottom-[-60px] right-[100px] absolute">
+            <img
+              className="w-[250px]"
+              src={getAbsolutePath().coreUrl + "/assets/slides/0900/Edwart.png"}
+            />
+          </div>
+          <IconWrapper
+            innerRef={icon_volume}
+            width={50}
+            height={50}
+            x={500}
+            y={400}
+          >
+            <img
+              src={
+                getAbsolutePath().coreUrl +
+                "/assets/slides/icons/icon_volume.svg"
+              }
+            />
+          </IconWrapper>
+          <Box
+            ref={text_container}
+            className="absolute left-[0px] bottom-[90px] w-[360px] text-left"
+          >
+            <Typography ref={header} variant="h4">
+              Poznaj Edwarta
+            </Typography>
+            <Typography ref={body}>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+              Voluptate vero odit deleniti, molestias explicabo eos dolorem,
+              dignissimos tempora laudantium sapiente est ducimus praesentium
+              sequi ipsum, tenetur quod reiciendis cumque commodi?
+            </Typography>
+          </Box>
+        </SectionContent>
+      )}
     </Slide>
   );
 };

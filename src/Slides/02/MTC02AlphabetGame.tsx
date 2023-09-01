@@ -5,9 +5,11 @@ import { gsap } from "gsap";
 import useSynchronizeWithReveal from "../../hooks/useSynchronizeWithReveal.tsx";
 import { Slide } from "@cenk1cenk2-presentations/react-reveal-base";
 import { getAbsolutePath } from "../../utils/functions.ts";
+import useAnimate from "../../hooks/useAnimate.tsx";
 
 const MTC02AlphabetGame = () => {
   useSynchronizeWithReveal();
+  const { animate, showContent } = useAnimate(1, 0);
 
   const alphabetHeader = useRef<HTMLDivElement>(null);
   const alphabetText = useRef<HTMLDivElement>(null);
@@ -18,6 +20,8 @@ const MTC02AlphabetGame = () => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      if (!animate.current) return;
+      animate.current = false;
       const tl = gsap.timeline({ delay: 0.7 });
       const tl2 = gsap.timeline({ delay: 1.0 });
 
@@ -68,57 +72,61 @@ const MTC02AlphabetGame = () => {
         getAbsolutePath().coreUrl + "/assets/slides/0200/img/bgred3.png"
       }
     >
-      <SectionContent>
-        <div className="relative flex w-full h-full">
-          <div ref={volumeIcon} className="absolute left-[150px] top-[300px]">
-            <img
-              className="w-[40px]"
-              src={
-                getAbsolutePath().coreUrl +
-                "/assets/slides/icons/icon_volume.svg"
-              }
-            />
+      {showContent.current && (
+        <SectionContent>
+          <div className="relative flex w-full h-full">
+            <div ref={volumeIcon} className="absolute left-[150px] top-[300px]">
+              <img
+                className="w-[40px]"
+                src={
+                  getAbsolutePath().coreUrl +
+                  "/assets/slides/icons/icon_volume.svg"
+                }
+              />
+            </div>
+            <div ref={listIcon} className="absolute left-[300px] top-[150px]">
+              <img
+                className="w-[40px]"
+                src={
+                  getAbsolutePath().coreUrl +
+                  "/assets/slides/icons/icon_list.svg"
+                }
+              />
+            </div>
+            <div ref={playIcon} className="absolute  left-[200px] top-[0px]">
+              <img
+                className="w-[40px]"
+                src={
+                  getAbsolutePath().coreUrl +
+                  "/assets/slides/icons/icon_play.svg"
+                }
+              />
+            </div>
+            <div className="absolute bottom-[-280px] translate-x-center flex w-[650px] ">
+              <img
+                ref={elon}
+                src={
+                  getAbsolutePath().coreUrl +
+                  "/assets/slides/0000/img/Pozycja_1.png"
+                }
+              />
+            </div>
+            <Box className="max-w-[300px] absolute top-[100px] right-0">
+              <Typography
+                ref={alphabetHeader}
+                variant="h4"
+                style={{ textTransform: "none" }}
+              >
+                Alfabet Game
+              </Typography>
+              <Typography ref={alphabetText} fontWeight="lighter">
+                Opis się zajmuje Fitness Mózgu? Kliknij w play i przekonaj się,
+                że uczenie się było do tej pory błędnie robione.
+              </Typography>
+            </Box>
           </div>
-          <div ref={listIcon} className="absolute left-[300px] top-[150px]">
-            <img
-              className="w-[40px]"
-              src={
-                getAbsolutePath().coreUrl + "/assets/slides/icons/icon_list.svg"
-              }
-            />
-          </div>
-          <div ref={playIcon} className="absolute  left-[200px] top-[0px]">
-            <img
-              className="w-[40px]"
-              src={
-                getAbsolutePath().coreUrl + "/assets/slides/icons/icon_play.svg"
-              }
-            />
-          </div>
-          <div className="absolute bottom-[-280px] translate-x-center flex w-[650px] ">
-            <img
-              ref={elon}
-              src={
-                getAbsolutePath().coreUrl +
-                "/assets/slides/0000/img/Pozycja_1.png"
-              }
-            />
-          </div>
-          <Box className="max-w-[300px] absolute top-[100px] right-0">
-            <Typography
-              ref={alphabetHeader}
-              variant="h4"
-              style={{ textTransform: "none" }}
-            >
-              Alfabet Game
-            </Typography>
-            <Typography ref={alphabetText} fontWeight="lighter">
-              Opis się zajmuje Fitness Mózgu? Kliknij w play i przekonaj się, że
-              uczenie się było do tej pory błędnie robione.
-            </Typography>
-          </Box>
-        </div>
-      </SectionContent>
+        </SectionContent>
+      )}
     </Slide>
   );
 };

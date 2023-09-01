@@ -5,9 +5,12 @@ import IconWrapper from "../../components/IconWrapper";
 import { gsap } from "gsap";
 import useSynchronizeWithReveal from "../../hooks/useSynchronizeWithReveal";
 import { getAbsolutePath } from "../../utils/functions";
+import useAnimate from "../../hooks/useAnimate";
+import SectionContent from "../../components/reveal-components/SectionContent";
 
 const Mtc07Main = () => {
   useSynchronizeWithReveal();
+  const { animate, showContent } = useAnimate(6, 0);
 
   const text1 = useRef<HTMLDivElement>(null);
   const text2 = useRef<HTMLDivElement>(null);
@@ -20,6 +23,8 @@ const Mtc07Main = () => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      if (!animate.current) return;
+      animate.current = false;
       const tl = gsap.timeline({ delay: 0.2 });
       tl.from(text1.current, { duration: 0.3, opacity: 0 })
         .from(text2.current, { duration: 0.3, opacity: 0 })
@@ -63,58 +68,67 @@ const Mtc07Main = () => {
         "/assets/slides/backgrounds/biurko-sideview.png"
       }
     >
-      <Box>
-        <div
-          ref={text1}
-          className="font-bold text-xl absolute top-[50px] left-[200px]"
-        >
-          Produktywność
-        </div>
-        <div
-          ref={text2}
-          className="font-bold text-xl absolute top-[200px] left-[150px]"
-        >
-          Muzyka
-        </div>
-        <div
-          ref={text3}
-          className="absolute right-[350px] bottom-[100px] text-xl font-bold"
-        >
-          Notatki
-        </div>
-        <div
-          ref={text4}
-          className="absolute text-xl font-bold right-[0] top-[400px]"
-        >
-          Woda
-        </div>
-        <div
-          ref={text5}
-          className="absolute text-xl font-bold right-[270px] top-[250px]"
-        >
-          Kofeina
-        </div>
-      </Box>
+      {showContent.current && (
+        <SectionContent>
+          <Box>
+            <div
+              ref={text1}
+              className="font-bold text-xl absolute top-[50px] left-[200px]"
+            >
+              Produktywność
+            </div>
+            <div
+              ref={text2}
+              className="font-bold text-xl absolute top-[200px] left-[150px]"
+            >
+              Muzyka
+            </div>
+            <div
+              ref={text3}
+              className="absolute right-[350px] bottom-[100px] text-xl font-bold"
+            >
+              Notatki
+            </div>
+            <div
+              ref={text4}
+              className="absolute text-xl font-bold right-[0] top-[400px]"
+            >
+              Woda
+            </div>
+            <div
+              ref={text5}
+              className="absolute text-xl font-bold right-[270px] top-[250px]"
+            >
+              Kofeina
+            </div>
+          </Box>
 
-      <IconWrapper innerRef={icon_volume} width={45} x={500} y={20}>
-        <img
-          src={
-            getAbsolutePath().coreUrl + "/assets/slides/icons/icon_volume.svg"
-          }
-        />
-      </IconWrapper>
+          <IconWrapper innerRef={icon_volume} width={45} x={500} y={20}>
+            <img
+              src={
+                getAbsolutePath().coreUrl +
+                "/assets/slides/icons/icon_volume.svg"
+              }
+            />
+          </IconWrapper>
 
-      <IconWrapper innerRef={icon_list} width={45} x={450} y={150}>
-        <img
-          src={getAbsolutePath().coreUrl + "/assets/slides/icons/icon_list.svg"}
-        />
-      </IconWrapper>
+          <IconWrapper innerRef={icon_list} width={45} x={450} y={150}>
+            <img
+              src={
+                getAbsolutePath().coreUrl + "/assets/slides/icons/icon_list.svg"
+              }
+            />
+          </IconWrapper>
 
-      <IconWrapper innerRef={icon_play} width={45} x={470} y={330}>
-        <img
-          src={getAbsolutePath().coreUrl + "/assets/slides/icons/icon_play.svg"}
-        />
-      </IconWrapper>
+          <IconWrapper innerRef={icon_play} width={45} x={470} y={330}>
+            <img
+              src={
+                getAbsolutePath().coreUrl + "/assets/slides/icons/icon_play.svg"
+              }
+            />
+          </IconWrapper>
+        </SectionContent>
+      )}
     </Slide>
   );
 };

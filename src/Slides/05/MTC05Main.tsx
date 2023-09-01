@@ -5,9 +5,12 @@ import { gsap } from "gsap";
 import { useLayoutEffect, useRef } from "react";
 import useSynchronizeWithReveal from "../../hooks/useSynchronizeWithReveal";
 import { getAbsolutePath } from "../../utils/functions";
+import useAnimate from "../../hooks/useAnimate";
+import SectionContent from "../../components/reveal-components/SectionContent";
 
 const Mtc05Main = () => {
   useSynchronizeWithReveal();
+  const { animate, showContent } = useAnimate(4, 0);
 
   const table = useRef<HTMLDivElement>(null);
   const elon = useRef<HTMLDivElement>(null);
@@ -20,6 +23,8 @@ const Mtc05Main = () => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      if (!animate.current) return;
+      animate.current = false;
       const tl = gsap.timeline({ delay: 0.2 });
       const tl2 = gsap.timeline({ delay: 0.3 });
       const tl3 = gsap.timeline({ delay: 0.6 });
@@ -83,53 +88,67 @@ const Mtc05Main = () => {
         getAbsolutePath().coreUrl + "/assets/slides/0400/img/redbg4.png"
       }
     >
-      <div ref={elon} className="absolute bottom-[100px] left-0">
-        <img
-          className="w-[400px]"
-          src={
-            getAbsolutePath().coreUrl + "/assets/slides/0000/img/Pozycja_1.png"
-          }
-        />
-      </div>
+      {showContent.current && (
+        <SectionContent>
+          <div ref={elon} className="absolute bottom-[100px] left-0">
+            <img
+              className="w-[400px]"
+              src={
+                getAbsolutePath().coreUrl +
+                "/assets/slides/0000/img/Pozycja_1.png"
+              }
+            />
+          </div>
 
-      <div ref={table} className="absolute left-[100px] bottom-0">
-        <img
-          className="w-[600px]"
-          src={
-            getAbsolutePath().coreUrl +
-            "/assets/slides/0400/img/stolik_z_pucharem.png"
-          }
-        />
-      </div>
+          <div ref={table} className="absolute left-[100px] bottom-0">
+            <img
+              className="w-[600px]"
+              src={
+                getAbsolutePath().coreUrl +
+                "/assets/slides/0400/img/stolik_z_pucharem.png"
+              }
+            />
+          </div>
 
-      <IconWrapper innerRef={icon_volume} width="40px" x={500} y={200}>
-        <img
-          src={
-            getAbsolutePath().coreUrl + "/assets/slides/icons/icon_volume.svg"
-          }
-        />
-      </IconWrapper>
+          <IconWrapper innerRef={icon_volume} width="40px" x={500} y={200}>
+            <img
+              src={
+                getAbsolutePath().coreUrl +
+                "/assets/slides/icons/icon_volume.svg"
+              }
+            />
+          </IconWrapper>
 
-      <IconWrapper innerRef={icon_list} width="40px" x={600} y={300}>
-        <img
-          src={getAbsolutePath().coreUrl + "/assets/slides/icons/icon_list.svg"}
-        />
-      </IconWrapper>
+          <IconWrapper innerRef={icon_list} width="40px" x={600} y={300}>
+            <img
+              src={
+                getAbsolutePath().coreUrl + "/assets/slides/icons/icon_list.svg"
+              }
+            />
+          </IconWrapper>
 
-      <IconWrapper innerRef={icon_play} width="40px" x={520} y={400}>
-        <img
-          src={getAbsolutePath().coreUrl + "/assets/slides/icons/icon_play.svg"}
-        />
-      </IconWrapper>
-      <Box className="w-[250px] absolute right-0 bottom-[150px]">
-        <Typography ref={prizesHeader} variant="h4" id="nagrody_header_0400">
-          Nagrody
-        </Typography>
-        <Typography ref={prizesBody}>
-          Opis - czym się zajmuje Fitness Mózgu? Kliknij w play i przekonaj się,
-          że uczenie się było do tej pory błędnie robione.
-        </Typography>
-      </Box>
+          <IconWrapper innerRef={icon_play} width="40px" x={520} y={400}>
+            <img
+              src={
+                getAbsolutePath().coreUrl + "/assets/slides/icons/icon_play.svg"
+              }
+            />
+          </IconWrapper>
+          <Box className="w-[250px] absolute right-0 bottom-[150px]">
+            <Typography
+              ref={prizesHeader}
+              variant="h4"
+              id="nagrody_header_0400"
+            >
+              Nagrody
+            </Typography>
+            <Typography ref={prizesBody}>
+              Opis - czym się zajmuje Fitness Mózgu? Kliknij w play i przekonaj
+              się, że uczenie się było do tej pory błędnie robione.
+            </Typography>
+          </Box>
+        </SectionContent>
+      )}
     </Slide>
   );
 };

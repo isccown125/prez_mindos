@@ -5,9 +5,12 @@ import { getAbsolutePath } from "../../utils/functions";
 import { gsap } from "gsap";
 import { useRef, useLayoutEffect } from "react";
 import IconWrapper from "../../components/IconWrapper";
+import useAnimate from "../../hooks/useAnimate";
+import SectionContent from "../../components/reveal-components/SectionContent";
 
 const MTC10Main = () => {
   useSynchronizeWithReveal();
+  const { animate, showContent } = useAnimate(9, 0);
 
   const edwart = useRef<HTMLDivElement>(null);
   const sunbed = useRef<HTMLDivElement>(null);
@@ -20,6 +23,8 @@ const MTC10Main = () => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      if (!animate.current) return;
+      animate.current = false;
       const tl1 = gsap.timeline({ delay: 1 });
       const tl4 = gsap.timeline({ delay: 1 });
       const tl5 = gsap.timeline({ delay: 0.5 });
@@ -90,59 +95,71 @@ const MTC10Main = () => {
       backgroundSize="180%"
       backgroundPosition="30% 90%"
     >
-      <div ref={sunbed} className="absolute bottom-[-50px] right-[-155px]">
-        <img className="h-[750px]" src="/assets/slides/1000/lezak.png" />
-      </div>
-      <div ref={edwart} className=" bottom-[-60px] right-[100px] absolute">
-        <img
-          className="w-[250px]"
-          src={
-            getAbsolutePath().coreUrl + "/assets/slides/1000/zastanawia_sie.png"
-          }
-          alt=""
-        />
-      </div>
-      <IconWrapper innerRef={icon_volume} width={45} x={500} y={200}>
-        <img
-          src={
-            getAbsolutePath().coreUrl + "/assets/slides/icons/icon_volume.svg"
-          }
-        />
-      </IconWrapper>
+      {showContent.current && (
+        <SectionContent>
+          <div ref={sunbed} className="absolute bottom-[-50px] right-[-155px]">
+            <img className="h-[750px]" src="/assets/slides/1000/lezak.png" />
+          </div>
+          <div ref={edwart} className=" bottom-[-60px] right-[100px] absolute">
+            <img
+              className="w-[250px]"
+              src={
+                getAbsolutePath().coreUrl +
+                "/assets/slides/1000/zastanawia_sie.png"
+              }
+              alt=""
+            />
+          </div>
+          <IconWrapper innerRef={icon_volume} width={45} x={500} y={200}>
+            <img
+              src={
+                getAbsolutePath().coreUrl +
+                "/assets/slides/icons/icon_volume.svg"
+              }
+            />
+          </IconWrapper>
 
-      <IconWrapper innerRef={icon_list} width={45} x={330} y={400}>
-        <img
-          src={getAbsolutePath().coreUrl + "/assets/slides/icons/icon_list.svg"}
-        />
-      </IconWrapper>
+          <IconWrapper innerRef={icon_list} width={45} x={330} y={400}>
+            <img
+              src={
+                getAbsolutePath().coreUrl + "/assets/slides/icons/icon_list.svg"
+              }
+            />
+          </IconWrapper>
 
-      <IconWrapper innerRef={icon_play} width={45} x={400} y={500}>
-        <img
-          src={getAbsolutePath().coreUrl + "/assets/slides/icons/icon_play.svg"}
-        />
-      </IconWrapper>
+          <IconWrapper innerRef={icon_play} width={45} x={400} y={500}>
+            <img
+              src={
+                getAbsolutePath().coreUrl + "/assets/slides/icons/icon_play.svg"
+              }
+            />
+          </IconWrapper>
 
-      <div
-        ref={left_container}
-        className="bg-yellow w-[330px] h-[90%] top-[30px] absolute left-[-20px] text-purple text-left p-5"
-      >
-        <Typography
-          ref={header}
-          variant="h4"
-          style={{ textTransform: "none", fontSize: "0.9em" }}
-          className="text-start"
-        >
-          <span className="text-purple font-extrabold">Strefa relaksu </span>
-        </Typography>
-        <Typography
-          ref={body}
-          className="text-purple text-start"
-          fontWeight="700"
-        >
-          Czym się zajmuje Fitness Mózgu? Kliknij w play i przekonaj się że
-          uczenie się było do tej pory błędnie robione,
-        </Typography>
-      </div>
+          <div
+            ref={left_container}
+            className="bg-yellow w-[330px] h-[90%] top-[30px] absolute left-[-20px] text-purple text-left p-5"
+          >
+            <Typography
+              ref={header}
+              variant="h4"
+              style={{ textTransform: "none", fontSize: "0.9em" }}
+              className="text-start"
+            >
+              <span className="text-purple font-extrabold">
+                Strefa relaksu{" "}
+              </span>
+            </Typography>
+            <Typography
+              ref={body}
+              className="text-purple text-start"
+              fontWeight="700"
+            >
+              Czym się zajmuje Fitness Mózgu? Kliknij w play i przekonaj się że
+              uczenie się było do tej pory błędnie robione,
+            </Typography>
+          </div>
+        </SectionContent>
+      )}
     </Slide>
   );
 };

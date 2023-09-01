@@ -3,13 +3,18 @@ import { getAbsolutePath } from "../../utils/functions";
 import { useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import useSynchronizeWithReveal from "../../hooks/useSynchronizeWithReveal";
+import useAnimate from "../../hooks/useAnimate";
+import SectionContent from "../../components/reveal-components/SectionContent";
 
 const MTC19Main = () => {
   useSynchronizeWithReveal();
+  const { animate, showContent } = useAnimate(18, 0);
   const handWithPhone = useRef<HTMLDivElement>(null);
   const logo = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      if (!animate.current) return;
+      animate.current = false;
       const tl1 = gsap.timeline({ delay: 0.6 });
 
       tl1
@@ -25,25 +30,30 @@ const MTC19Main = () => {
         getAbsolutePath().coreUrl + "/assets/slides/backgrounds/bg-purple.png"
       }
     >
-      <div>
-        <div
-          ref={handWithPhone}
-          className="absolute left-[-250px] bottom-[-100px]"
-        >
-          <img
-            className="h-[600px]"
-            src={getAbsolutePath().coreUrl + "/assets/slides/1900/phone3d.png"}
-          />
-        </div>
-        <div ref={logo} className="absolute right-[100px] top-[150px]">
-          <img
-            className="h-[60px]"
-            src={
-              getAbsolutePath().coreUrl + "/assets/slides/1900/mindos_logo2.png"
-            }
-          />
-        </div>
-      </div>
+      {showContent.current && (
+        <SectionContent>
+          <div
+            ref={handWithPhone}
+            className="absolute left-[-250px] bottom-[-100px]"
+          >
+            <img
+              className="h-[600px]"
+              src={
+                getAbsolutePath().coreUrl + "/assets/slides/1900/phone3d.png"
+              }
+            />
+          </div>
+          <div ref={logo} className="absolute right-[100px] top-[150px]">
+            <img
+              className="h-[60px]"
+              src={
+                getAbsolutePath().coreUrl +
+                "/assets/slides/1900/mindos_logo2.png"
+              }
+            />
+          </div>
+        </SectionContent>
+      )}
     </Slide>
   );
 };

@@ -4,9 +4,12 @@ import {useLayoutEffect, useRef} from 'react'
 import useSynchronizeWithReveal from "../../hooks/useSynchronizeWithReveal.tsx";
 import { Slide } from "@cenk1cenk2-presentations/react-reveal-base";
 import { getAbsolutePath } from "../../utils/functions.ts";
+import SectionContent from "../../components/reveal-components/SectionContent.tsx";
+import useAnimate from "../../hooks/useAnimate.tsx";
 
 const Mtc04MainBalls = () => {
   useSynchronizeWithReveal();
+  const { animate, showContent } = useAnimate(3, 1);
 
   const elon = useRef<HTMLDivElement>(null);
   const yellowBg = useRef<HTMLDivElement>(null);
@@ -15,6 +18,8 @@ const Mtc04MainBalls = () => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      if (!animate.current) return;
+      animate.current = false;
       const tl = gsap.timeline({ delay: 0.5 });
       tl.from(elon.current, { duration: 1.4, y: -200, opacity: 0 });
 
@@ -37,35 +42,42 @@ const Mtc04MainBalls = () => {
         "/assets/slides/0301/img/strefa-relaksu-without-transparent.png"
       }
     >
-      <div ref={elon} className="absolute left-0-[70px] bottom-[-50px]">
-        <img
-          className="w-[350px]"
-          src={
-            getAbsolutePath().coreUrl + "/assets/slides/0000/img/Pozycja_1.png"
-          }
-        />
-      </div>
-      <div
-        ref={yellowBg}
-        className="bg-yellow w-[330px] h-full absolute right-0 text-purple text-left p-5"
-      >
-        <Typography
-          variant="h4"
-          style={{ textTransform: "none", fontSize: "0.9em" }}
-          ref={yellowBgHeader}
-          className="text-start"
-        >
-          <span className="text-purple font-extrabold">Strefa relaksu </span>
-        </Typography>
-        <Typography
-          className="text-purple text-start"
-          fontWeight="700"
-          ref={yellowBGBody}
-        >
-          Czym się zajmuje Fitness Mózgu? Kliknij w play i przekonaj się że
-          uczenie się było do tej pory błędnie robione,
-        </Typography>
-      </div>
+      {showContent.current && (
+        <SectionContent>
+          <div ref={elon} className="absolute left-0-[70px] bottom-[-50px]">
+            <img
+              className="w-[350px]"
+              src={
+                getAbsolutePath().coreUrl +
+                "/assets/slides/0000/img/Pozycja_1.png"
+              }
+            />
+          </div>
+          <div
+            ref={yellowBg}
+            className="bg-yellow w-[330px] h-full absolute right-0 text-purple text-left p-5"
+          >
+            <Typography
+              variant="h4"
+              style={{ textTransform: "none", fontSize: "0.9em" }}
+              ref={yellowBgHeader}
+              className="text-start"
+            >
+              <span className="text-purple font-extrabold">
+                Strefa relaksu{" "}
+              </span>
+            </Typography>
+            <Typography
+              className="text-purple text-start"
+              fontWeight="700"
+              ref={yellowBGBody}
+            >
+              Czym się zajmuje Fitness Mózgu? Kliknij w play i przekonaj się że
+              uczenie się było do tej pory błędnie robione,
+            </Typography>
+          </div>
+        </SectionContent>
+      )}
     </Slide>
   );
 };

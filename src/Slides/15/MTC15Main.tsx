@@ -5,9 +5,12 @@ import IconWrapper from "../../components/IconWrapper";
 import { useRef, useLayoutEffect } from "react";
 import useSynchronizeWithReveal from "../../hooks/useSynchronizeWithReveal";
 import { gsap } from "gsap";
+import useAnimate from "../../hooks/useAnimate";
+import SectionContent from "../../components/reveal-components/SectionContent";
 
 const MTC15Main = () => {
   useSynchronizeWithReveal();
+  const { animate, showContent } = useAnimate(14, 0);
 
   const elon = useRef<HTMLDivElement>(null);
   const edwart = useRef<HTMLDivElement>(null);
@@ -16,6 +19,8 @@ const MTC15Main = () => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      if (!animate.current) return;
+      animate.current = false;
       const tl1 = gsap.timeline({ delay: 0.6 });
       const tl2 = gsap.timeline({ delay: 0.8 });
       const tl3 = gsap.timeline({ delay: 1 });
@@ -34,30 +39,43 @@ const MTC15Main = () => {
         getAbsolutePath().coreUrl + "/assets/slides/backgrounds/bg-green.png"
       }
     >
-      <div className="absolute top-[130px]" ref={edwart}>
-        <img
-          className="w-[350px]"
-          src={getAbsolutePath().coreUrl + "/assets/slides/1500/edwartok.png"}
-        />
-      </div>
-      <div className="absolute top-[200px] left-[250px]" ref={elon}>
-        <img
-          className="w-[400px]"
-          src={getAbsolutePath().coreUrl + "/assets/slides/1500/elon.png"}
-        />
-      </div>
-      <IconWrapper x={0} y={500} height={40} width={40} innerRef={icon_volume}>
-        <img
-          src={
-            getAbsolutePath().coreUrl + "/assets/slides/icons/icon_volume.svg"
-          }
-        />
-      </IconWrapper>
-      <Box className="w-[300px] text-left absolute bottom-[180px] right-0">
-        <Typography variant="h4" ref={text}>
-          Ucz się z Elonem <br /> i Edwartem!
-        </Typography>
-      </Box>
+      {showContent.current && (
+        <SectionContent>
+          <div className="absolute top-[130px]" ref={edwart}>
+            <img
+              className="w-[350px]"
+              src={
+                getAbsolutePath().coreUrl + "/assets/slides/1500/edwartok.png"
+              }
+            />
+          </div>
+          <div className="absolute top-[200px] left-[250px]" ref={elon}>
+            <img
+              className="w-[400px]"
+              src={getAbsolutePath().coreUrl + "/assets/slides/1500/elon.png"}
+            />
+          </div>
+          <IconWrapper
+            x={0}
+            y={500}
+            height={40}
+            width={40}
+            innerRef={icon_volume}
+          >
+            <img
+              src={
+                getAbsolutePath().coreUrl +
+                "/assets/slides/icons/icon_volume.svg"
+              }
+            />
+          </IconWrapper>
+          <Box className="w-[300px] text-left absolute bottom-[180px] right-0">
+            <Typography variant="h4" ref={text}>
+              Ucz się z Elonem <br /> i Edwartem!
+            </Typography>
+          </Box>
+        </SectionContent>
+      )}
     </Slide>
   );
 };

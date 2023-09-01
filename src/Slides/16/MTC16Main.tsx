@@ -5,9 +5,12 @@ import { Box, Typography } from "@mui/material";
 import { useRef, useLayoutEffect } from "react";
 import useSynchronizeWithReveal from "../../hooks/useSynchronizeWithReveal";
 import { gsap } from "gsap";
+import useAnimate from "../../hooks/useAnimate";
+import SectionContent from "../../components/reveal-components/SectionContent";
 
 const MTC16Main = () => {
   useSynchronizeWithReveal();
+  const { animate, showContent } = useAnimate(15, 0);
 
   const elon = useRef<HTMLDivElement>(null);
   const wstega = useRef<HTMLDivElement>(null);
@@ -18,6 +21,8 @@ const MTC16Main = () => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      if (!animate.current) return;
+      animate.current = false;
       const tl1 = gsap.timeline({ delay: 0.8 });
       const tl2 = gsap.timeline({ delay: 0.6 });
       const tl3 = gsap.timeline({ delay: 1 });
@@ -51,38 +56,61 @@ const MTC16Main = () => {
         getAbsolutePath().coreUrl + "/assets/slides/backgrounds/cut_bg.png"
       }
     >
-      <div ref={elon} className="absolute bottom-0 left-[130px] z-10">
-        <img
-          className="w-[550px]"
-          src={getAbsolutePath().coreUrl + "/assets/slides/1600/elon_cut.png"}
-        />
-      </div>
-      <div ref={wstega} className="absolute bottom-0 right-[-450px]">
-        <img
-          className="w-[1350px]"
-          src={getAbsolutePath().coreUrl + "/assets/slides/1600/wstega2.png"}
-        />
-      </div>
-      <IconWrapper innerRef={icon_volume} width={60} height={60} x={0} y={500}>
-        <img
-          src={
-            getAbsolutePath().coreUrl + "/assets/slides/icons/icon_volume.svg"
-          }
-        />
-      </IconWrapper>
-      <IconWrapper innerRef={icon_list} width={60} height={60} x={100} y={450}>
-        <img
-          src={getAbsolutePath().coreUrl + "/assets/slides/icons/icon_list.svg"}
-        />
-      </IconWrapper>
-      <Box className="text-left absolute right-0 top-[100px]">
-        <Typography ref={header} variant="h4">
-          Witaj
-        </Typography>
-        <Typography ref={body}>
-          Elon wita i przecina wstęgę + widok POV z domkiem na starcie
-        </Typography>
-      </Box>
+      {showContent.current && (
+        <SectionContent>
+          <div ref={elon} className="absolute bottom-0 left-[130px] z-10">
+            <img
+              className="w-[550px]"
+              src={
+                getAbsolutePath().coreUrl + "/assets/slides/1600/elon_cut.png"
+              }
+            />
+          </div>
+          <div ref={wstega} className="absolute bottom-0 right-[-450px]">
+            <img
+              className="w-[1350px]"
+              src={
+                getAbsolutePath().coreUrl + "/assets/slides/1600/wstega2.png"
+              }
+            />
+          </div>
+          <IconWrapper
+            innerRef={icon_volume}
+            width={60}
+            height={60}
+            x={0}
+            y={500}
+          >
+            <img
+              src={
+                getAbsolutePath().coreUrl +
+                "/assets/slides/icons/icon_volume.svg"
+              }
+            />
+          </IconWrapper>
+          <IconWrapper
+            innerRef={icon_list}
+            width={60}
+            height={60}
+            x={100}
+            y={450}
+          >
+            <img
+              src={
+                getAbsolutePath().coreUrl + "/assets/slides/icons/icon_list.svg"
+              }
+            />
+          </IconWrapper>
+          <Box className="text-left absolute right-0 top-[100px]">
+            <Typography ref={header} variant="h4">
+              Witaj
+            </Typography>
+            <Typography ref={body}>
+              Elon wita i przecina wstęgę + widok POV z domkiem na starcie
+            </Typography>
+          </Box>
+        </SectionContent>
+      )}
     </Slide>
   );
 };
