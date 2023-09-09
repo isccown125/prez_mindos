@@ -1,4 +1,1 @@
-<svg id="buttonZamawiam" xmlns="http://www.w3.org/2000/svg" width="174" height="55" viewBox="0 0 174 55">
-  <rect id="Rectangle" width="174" height="55" rx="16" fill="#fdd63c"/>
-  <text id="Add_to_cart" data-name="Add to cart" transform="translate(43 33)" fill="#6a2578" font-size="15" font-family="Montserrat-ExtraBold, Montserrat" font-weight="800"><tspan x="0" y="0">Zamawiam</tspan></text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="174" height="55" viewBox="0 0 174 55"><rect width="174" height="55" fill="#fdd63c" rx="16"/><text fill="#6a2578" data-name="Add to cart" font-family="Montserrat-ExtraBold, Montserrat" font-size="15" font-weight="800" transform="translate(43 33)"><tspan x="0" y="0">Zamawiam</tspan></text></svg>
