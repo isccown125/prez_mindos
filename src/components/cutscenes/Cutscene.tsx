@@ -54,18 +54,6 @@ const Cutscene = () => {
     return () => ctx.revert();
   }, [showUI]);
 
-  useEffect(() => {
-    let timeoutID = 0;
-
-    if (isPlaying)
-      timeoutID = setTimeout(() => {
-        videoRef?.current.play();
-      }, 2000);
-    return () => {
-      clearTimeout(timeoutID);
-    };
-  }, [isPlaying]);
-
   const handleStartLoadVideo = () => {
     dispatch(videoIsLoading());
     dispatch(stopPlaying());
