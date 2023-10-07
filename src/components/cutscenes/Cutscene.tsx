@@ -1,43 +1,33 @@
-import {
-  useLayoutEffect,
-  useReducer,
-  useRef,
-  useState,
-  RefObject,
-} from "react";
+import { useLayoutEffect, useEffect, useRef, useState, RefObject } from "react";
 import { createPortal } from "react-dom";
-import { getAbsolutePath } from "../../utils/functions";
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import { gsap } from "gsap";
-import useCutscenes from "../../hooks/useCutscenes";
 import { useAppDispatch, useAppSelector } from "../../store";
 import {
   hideCutscene,
   showContent,
   showCutscene,
+  showUIAction,
+  startPlaying,
   stopPlaying,
+  videoIsLoaded,
+  videoIsLoading,
 } from "../../store/slices/cutscenes-slice";
 
-interface Props {
-  children?: React.ReactNode;
-  showUI?: boolean;
-  cutsceneRef?: RefObject<HTMLVideoElement>;
-  setCutscenePath?: () => void;
-  openCutscene?: (cb: () => void) => void;
-}
-
-const Cutscene = ({
-  children,
-  showUI = true,
-  openCutscene,
-  cutsceneRef,
-}: Props) => {
-  const [showPrevButton, setShowPrevButton] = useState<boolean>(true);
-  const [showNextButton, setShowNextButton] = useState<boolean>(true);
+const Cutscene = () => {
+  const [showPrevButton] = useState<boolean>(true);
+  const [showNextButton] = useState<boolean>(true);
+  const cutsceneRef = useRef<HTMLDivElement>(null);
 
   const cutsceneState = useAppSelector((state) => state.cutscenes);
-  const { isContentVisible, isCutsceneVisible, isPlaying, currentCutscene } =
-    cutsceneState;
+  const {
+    showUI,
+    isContentVisible,
+    isPlaying,
+    currentCutscene,
+    isCutsceneVisible,
+    isLoading,
+  } = cutsceneState;
 
   const dispatch = useAppDispatch();
 
@@ -46,27 +36,85 @@ const Cutscene = ({
       if (isCutsceneVisible) {
         dispatch(showContent());
         const tl1 = gsap.timeline();
+        const tl2 = gsap.timeline();
+        tl1.to(contentLayerRef.current, { duration: 0.3, opacity: 1 });
+        tl2.to(cutsceneRef.current, { opacity: 1 });
+      }
+    });
+    return () => ctx.revert();
+  }, [isCutsceneVisible]);
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      if (isCutsceneVisible) {
+        dispatch(showContent());
+        const tl1 = gsap.timeline();
         tl1.to(contentLayerRef.current, { duration: 0.3, opacity: 1 });
       }
     });
-
     return () => ctx.revert();
-  }, [dispatch, isCutsceneVisible]);
+  }, [showUI]);
 
+  useEffect(() => {
+    let timeoutID = 0;
+
+    if (isPlaying)
+      timeoutID = setTimeout(() => {
+        videoRef?.current.play();
+      }, 2000);
+    return () => {
+      clearTimeout(timeoutID);
+    };
+  }, [isPlaying]);
+
+  const handleStartLoadVideo = () => {
+    dispatch(videoIsLoading());
+    dispatch(stopPlaying());
+  };
+  const handleVideoCanPlayThrough = () => {
+    dispatch(videoIsLoaded());
+    dispatch(startPlaying());
+  };
+  const handleVideoEnded = () => {
+    dispatch(stopPlaying());
+    dispatch(showContent());
+    dispatch(showUIAction());
+  };
+  const handleLoadedVideo = () => {
+    dispatch(videoIsLoaded());
+    dispatch(startPlaying());
+  };
+
+  const videoRef = useRef<HTMLVideoElement>(null);
   const contentLayerRef = useRef<HTMLDivElement>(null);
   return (
     <>
       {isCutsceneVisible &&
         createPortal(
-          <div className="fixed z-30 inset-0 flex w-full h-full bg-focusZone">
+          <div
+            className="fixed z-30 inset-0 flex w-full h-full bg-[rgba(0,0,0,0.8)]"
+            style={{ opacity: 0 }}
+            ref={cutsceneRef}
+          >
             <video
-              ref={cutsceneRef}
-              onEnded={() => dispatch(stopPlaying())}
+              ref={videoRef}
+              onEnded={handleVideoEnded}
               muted
-              autoPlay={isPlaying}
+              onWaiting={handleStartLoadVideo}
+              onPlaying={handleLoadedVideo}
+              onCanPlayThrough={handleVideoCanPlayThrough}
               src={currentCutscene?.path}
-              className="flex w-full absolute inset-0"
+              className="flex w-[100vw] h-[100vh] absolute inset-0"
             ></video>
+
+            {isLoading && (
+              <div className="top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] fixed">
+                <CircularProgress
+                  color="secondary"
+                  translate="yes"
+                  size={"150px"}
+                />
+              </div>
+            )}
             {isContentVisible && (
               <div
                 ref={contentLayerRef}
@@ -76,24 +124,30 @@ const Cutscene = ({
                 <div className="absolute flex w-full h-full left-0 top-0 z-40">
                   {currentCutscene?.render()}
                 </div>
-                {showUI && (
-                  <div className="absolute flex w-full h-full inset-0">
-                    {showPrevButton && (
-                      <div className="absolute z-40 bottom-0 left-0 bg-yellow">
-                        <Button onClick={() => dispatch(hideCutscene())}>
-                          Zamknij
-                        </Button>
-                      </div>
-                    )}
-                    {showNextButton && (
-                      <div className="absolute z-40 bottom-0 right-0 bg-yellow">
-                        <Button onClick={() => dispatch(showCutscene())}>
-                          Przejdz dalej
-                        </Button>
-                      </div>
-                    )}
-                  </div>
-                )}
+              </div>
+            )}
+            {showUI && (
+              <div className="fixed flex w-full h-full z-50">
+                <div className="relative w-full h-full">
+                  {showPrevButton && (
+                    <div className="absolute bottom-0 left-0 bg-yellow">
+                      <Button
+                        onClick={() => {
+                          dispatch(hideCutscene());
+                        }}
+                      >
+                        Zamknij
+                      </Button>
+                    </div>
+                  )}
+                  {showNextButton && (
+                    <div className="absolute bottom-0 right-0 bg-yellow">
+                      <Button onClick={() => dispatch(showCutscene())}>
+                        Przejdz dalej
+                      </Button>
+                    </div>
+                  )}
+                </div>
               </div>
             )}
           </div>,

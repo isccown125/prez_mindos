@@ -1,5 +1,5 @@
 import { Slide } from "@cenk1cenk2-presentations/react-reveal-base";
-import { Box } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import { useLayoutEffect, useRef } from "react";
 import IconWrapper from "../../components/IconWrapper";
 import { gsap } from "gsap";
@@ -7,6 +7,7 @@ import useSynchronizeWithReveal from "../../hooks/useSynchronizeWithReveal";
 import { getAbsolutePath } from "../../utils/functions";
 import useAnimate from "../../hooks/useAnimate";
 import SectionContent from "../../components/reveal-components/SectionContent";
+import PulseIcon from "../../components/icons/PulseIcon";
 
 const Mtc07Main = () => {
   useSynchronizeWithReveal();
@@ -101,6 +102,31 @@ const Mtc07Main = () => {
             >
               Kofeina
             </div>
+            <IconWrapper x={150} y={30}>
+              <IconButton>
+                <PulseIcon></PulseIcon>
+              </IconButton>
+            </IconWrapper>
+            <IconWrapper x={100} y={180}>
+              <IconButton>
+                <PulseIcon></PulseIcon>
+              </IconButton>
+            </IconWrapper>
+            <IconWrapper x={720} y={230}>
+              <IconButton>
+                <PulseIcon></PulseIcon>
+              </IconButton>
+            </IconWrapper>
+            <IconWrapper x={650} y={480}>
+              <IconButton>
+                <PulseIcon></PulseIcon>
+              </IconButton>
+            </IconWrapper>
+            <IconWrapper x={850} y={380}>
+              <IconButton>
+                <PulseIcon></PulseIcon>
+              </IconButton>
+            </IconWrapper>
           </Box>
 
           <IconWrapper innerRef={icon_volume} width={45} x={500} y={20}>

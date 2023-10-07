@@ -35,7 +35,7 @@ const MTC13Main = () => {
       const tl6 = gsap.timeline({ delay: 3 });
       tl1
         .from(hexagon.current, { opacity: 0, x: -300 })
-        .from(chartBg.current, { width: 0, x: -300 })
+        .from(chartBg.current, { scaleX: 0, x: -300 })
         .from(chartContainer.current, { width: 0, opacity: 0 })
         .from(header.current, {
           x: 300,
@@ -80,7 +80,7 @@ const MTC13Main = () => {
             </Box>
             <Box
               ref={chartBg}
-              className="bg-yellow w-[550px] h-[280px] absolute right-[20px] bottom-[60px] rounded-xl"
+              className="bg-yellow w-[550px] h-[280px] origin-left absolute right-[20px] bottom-[60px] rounded-xl"
             >
               <div
                 ref={chartContainer}

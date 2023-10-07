@@ -1,6 +1,6 @@
 import Deck from "./components/reveal-components/Deck.tsx";
-import RootSection from "./Slides/01/RootSection.tsx";
-import MTC03Main from "./Slides/03/MTC033Main.tsx";
+import MTC01Main from "./Slides/01/MTC01Main.tsx";
+import MTC03Main from "./Slides/03/MTC03Main.tsx";
 import MTC02Main from "./Slides/02/MTC02Main.tsx";
 import MTC04Main from "./Slides/04/MTC04Main.tsx";
 import Mtc05Main from "./Slides/05/MTC05Main.tsx";
@@ -22,7 +22,7 @@ import MTC19Main from "./Slides/19/MTC19Main.tsx";
 function App() {
   return (
     <Deck>
-      <RootSection />
+      <MTC01Main />
       <MTC02Main />
       <MTC03Main />
       <MTC04Main />

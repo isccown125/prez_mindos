@@ -6,6 +6,7 @@ import Slide from "@cenk1cenk2-presentations/react-reveal-base/dist/components/S
 import { getAbsolutePath } from "../../utils/functions.ts";
 import useAnimate from "../../hooks/useAnimate.tsx";
 import SectionContent from "../../components/reveal-components/SectionContent.tsx";
+import IconWrapper from "../../components/IconWrapper.tsx";
 
 const Main = () => {
   useSynchronizeWithReveal();
@@ -193,42 +194,42 @@ const Main = () => {
                       }
                     />
                   </div>
-                  <div
-                    ref={icon1}
-                    className="absolute z-20"
-                    style={{ left: "80px", bottom: 80 }}
+                  <IconWrapper
+                    innerRef={icon1}
+                    x={70}
+                    y={280}
+                    z={30}
+                    width={55}
                   >
-                    <Avatar
+                    <img
                       src={
                         getAbsolutePath().coreUrl +
                         "/assets/slides/icons/icon_volume.svg"
                       }
                     />
-                  </div>
-                  <div
-                    ref={icon2}
-                    className="absolute z-20"
-                    style={{ right: "105px", bottom: 90 }}
-                  >
-                    <Avatar
+                  </IconWrapper>
+                  <IconWrapper innerRef={icon2} width={55} x={40} y={80} z={30}>
+                    <img
                       src={
                         getAbsolutePath().coreUrl +
                         "/assets/slides/icons/icon_list.svg"
                       }
                     />
-                  </div>
-                  <div
-                    ref={icon3}
-                    className="absolute z-20"
-                    style={{ right: "90px", top: 170 }}
+                  </IconWrapper>
+                  <IconWrapper
+                    innerRef={icon3}
+                    width={55}
+                    x={270}
+                    y={130}
+                    z={30}
                   >
-                    <Avatar
+                    <img
                       src={
                         getAbsolutePath().coreUrl +
                         "/assets/slides/icons/icon_play.svg"
                       }
                     />
-                  </div>
+                  </IconWrapper>
                 </div>
               </Box>
             </Grid>
